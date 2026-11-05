@@ -484,9 +484,9 @@ export function PartDetailDrawer({ activity, row, partNo, onClose }: PartDetailD
     <>
       <div className="fixed inset-0 z-40 bg-black/30" onClick={onClose} />
 
-      <div className="fixed top-0 right-0 z-50 h-full w-full max-w-2xl bg-white shadow-2xl flex flex-col">
-        {/* Header */}
-        <div className="border-b border-[var(--color-border)] px-5 py-4 flex-shrink-0">
+      <div className="fixed top-0 right-0 z-50 h-full w-full max-w-2xl bg-white shadow-2xl flex flex-col max-lg:h-[100dvh] max-lg:overflow-y-auto">
+        {/* Header (mobile: scrolls away with the form) */}
+        <div className="border-b border-[var(--color-border)] px-5 py-4 flex-shrink-0 max-sm:px-4">
           <div className="flex items-start justify-between">
             <div className="min-w-0 flex-1">
               <div className="flex items-center gap-2 mb-1">
@@ -546,12 +546,12 @@ export function PartDetailDrawer({ activity, row, partNo, onClose }: PartDetailD
         </div>
 
         {/* Tabs */}
-        <div className="px-5 pt-3 flex-shrink-0 border-b border-[var(--color-border)]">
-          <Tabs items={tabs} activeId={activeTab} onChange={setActiveTab} />
+        <div className="px-5 pt-3 flex-shrink-0 border-b border-[var(--color-border)] max-lg:sticky max-lg:top-0 max-lg:z-10 max-lg:bg-white max-sm:px-4">
+          <Tabs items={tabs} activeId={activeTab} onChange={setActiveTab} className="max-lg:flex-nowrap" />
         </div>
 
         {/* Body */}
-        <div className="flex-1 overflow-y-auto p-5">
+        <div className="flex-1 overflow-y-auto p-5 max-lg:flex-none max-lg:overflow-visible max-sm:p-4">
           {/* Release-to-vendor gate */}
           {released ? (
             <div
@@ -1000,7 +1000,7 @@ export function PartDetailDrawer({ activity, row, partNo, onClose }: PartDetailD
         </div>
 
         {/* Footer */}
-        <div className="border-t border-[var(--color-border)] px-5 py-3 flex-shrink-0">
+        <div className="border-t border-[var(--color-border)] px-5 py-3 flex-shrink-0 max-lg:sticky max-lg:bottom-0 max-lg:mt-auto max-lg:bg-white max-sm:px-4">
           {/* PIC validation actions */}
           {isPic && isSubmitted && (
             <div className="mb-3">

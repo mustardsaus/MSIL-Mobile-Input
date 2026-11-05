@@ -1,6 +1,8 @@
 import { useState } from 'react'
 import { NavLink, Outlet } from 'react-router-dom'
 import { PersonaSwitcher } from '../components/PersonaSwitcher'
+import { Modal } from '../components/Modal'
+import { Button } from '../components/Button'
 import { usePersonaStore } from '../store/personaStore'
 import type { PersonaId } from '../store/personaStore'
 import { DemoTour } from './home/DemoTour'
@@ -18,34 +20,47 @@ import epmpSub from '../assets/epmp-sub.png'
 function SampleDataButton() {
   const loadSampleParts = useQAStore((st) => st.loadSampleParts)
   const unloadParts = useQAStore((st) => st.unloadParts)
+  // An in-app confirmation instead of window.confirm(): browsers and embedded viewers that block native
+  // dialogs return false from confirm() without showing anything, which made both buttons appear to do nothing.
+  const [ask, setAsk] = useState<null | 'load' | 'unload'>(null)
   const cls =
     'flex-none rounded-lg border-2 border-dashed border-[#b45309] bg-[#fde68a] px-3 py-2 text-xs font-bold text-[#78350f] shadow-sm hover:bg-[#fcd34d] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#b45309]'
+  const copy = {
+    load: { title: 'Load sample parts?', body: 'This replaces ALL current parts and activity data with sample parts built from the current activity fields.', ok: 'Load sample parts' },
+    unload: { title: 'Unload parts?', body: 'This removes ALL parts and their activity data. The activity list stays.', ok: 'Unload parts' }
+  }
   return (
     <div className="flex flex-none items-center gap-2">
-      <button
-        type="button"
-        onClick={() => {
-          if (window.confirm('Load sample parts?\n\nThis replaces ALL current parts and activity data with sample parts built from the current activity fields.')) {
-            loadSampleParts()
-          }
-        }}
-        className={cls}
-        title="Temporary: rebuild sample parts from the current activity fields"
-      >
+      <button type="button" onClick={() => setAsk('load')} className={cls} title="Temporary: rebuild sample parts from the current activity fields">
         ⚠ Load sample parts (temp)
       </button>
-      <button
-        type="button"
-        onClick={() => {
-          if (window.confirm('Unload parts?\n\nThis removes ALL parts and their activity data. The activity list stays.')) {
-            unloadParts()
-          }
-        }}
-        className={cls}
-        title="Temporary: remove all parts and their activity data"
-      >
+      <button type="button" onClick={() => setAsk('unload')} className={cls} title="Temporary: remove all parts and their activity data">
         ⚠ Unload parts (temp)
       </button>
+      <Modal
+        open={ask !== null}
+        onClose={() => setAsk(null)}
+        title={ask ? copy[ask].title : ''}
+        size="sm"
+        footer={
+          <div className="flex justify-end gap-2">
+            <Button variant="secondary" size="sm" onClick={() => setAsk(null)}>Cancel</Button>
+            <Button
+              variant="primary"
+              size="sm"
+              onClick={() => {
+                if (ask === 'load') loadSampleParts()
+                if (ask === 'unload') unloadParts()
+                setAsk(null)
+              }}
+            >
+              {ask ? copy[ask].ok : ''}
+            </Button>
+          </div>
+        }
+      >
+        <p className="text-sm text-[var(--color-text)]">{ask ? copy[ask].body : ''}</p>
+      </Modal>
     </div>
   )
 }

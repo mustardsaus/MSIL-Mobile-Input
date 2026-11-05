@@ -9,6 +9,7 @@ import type { StatusValue } from '../../components/StatusPill'
 import type { PartRecord } from '../../domain'
 import { PartDetailDrawer } from './PartDetailDrawer'
 import { listColumnFields, listCellTexts } from '../listColumns'
+import { useIsMobile } from '../../hooks/useIsMobile'
 import { DEMO_TODAY, fmtDate, fmtOffsetRange, partInScope, rowInScope, toRygStatus, canMarkNotApplicable, canReverseNotApplicable } from '../scope'
 import { isUpcoming, useUpcomingOnly, UpcomingToggle } from '../upcoming'
 
@@ -19,6 +20,7 @@ type ApplicabilityFilter = 'All' | 'applicable' | 'na'
 export function WorkspacePage() {
   // The route param is the template row id (an activity under a milestone for a section).
   const { id } = useParams<{ id: string }>()
+  const isMobile = useIsMobile()
   const { activities, entries, templateRows, models: modelRecords, parts, partReleases, partAcks, setNotApplicable } = useQAStore()
   const { currentPersona } = usePersonaStore()
 
@@ -525,7 +527,8 @@ export function WorkspacePage() {
             <p className="font-medium">No parts match your filters</p>
           </div>
         ) : (
-          <div className="table-scroll">
+          // Mobile: sideways scroll with the Open column pinned right (laptop unchanged).
+          <div className={`table-scroll ${isMobile ? 'tbl-sleeve tbl-sleeve-r' : ''}`}>
             <table className="w-full text-sm">
               <thead>
                 <tr className="border-b border-[var(--color-border)] bg-[var(--color-surface)]">

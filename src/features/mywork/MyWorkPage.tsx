@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+import { Fragment, useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
 import {
   ResponsiveContainer, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Cell
@@ -18,6 +18,7 @@ import { buildWorkGroups, canEnterWork, canValidate, countWork, hasMyWork } from
 import { AiImportPanel } from './AiImportPanel'
 import { ReleasePanel } from './ReleasePanel'
 import { DelayPanel } from '../delay/DelayPanel'
+import { useIsMobile } from '../../hooks/useIsMobile'
 import type { WorkGroup, WorkMode } from './workQueue'
 
 const filterCls =
@@ -220,6 +221,10 @@ export function MyWorkPage() {
     }
   }
 
+  // Mobile: Activity is the first column (pinned left); laptop keeps the original order.
+  const isMobile = useIsMobile()
+  const tableCols = isMobile ? [TABLE_COLS.find((c) => c.key === 'activity')!, ...TABLE_COLS.filter((c) => c.key !== 'activity')] : TABLE_COLS
+
   // The detail table respects the selected bucket/group, then the per-column filters, then the sort.
   const tableRows = useMemo(() => {
     let rows = instances
@@ -401,12 +406,13 @@ export function MyWorkPage() {
                 )}
               </div>
             </div>
-            <div className="page-sticky-head">
+            {/* Mobile: the table scrolls sideways inside this wrapper; Activity is pinned left and Open right (.tbl-sleeve). */}
+            <div className={`page-sticky-head ${isMobile ? 'tbl-sleeve overflow-x-auto' : ''}`}>
               <table className="w-full text-sm">
                 <thead>
                   {/* Sortable header row */}
                   <tr className="border-b border-[var(--color-border)] bg-[var(--color-surface)]">
-                    {TABLE_COLS.map((c) => (
+                    {tableCols.map((c) => (
                       <th key={c.key} className={`${thCls} cursor-pointer select-none hover:text-[var(--color-text)]`}
                         onClick={() => toggleSort(c.key)}
                         aria-sort={sortKey === c.key ? (sortDir === 'asc' ? 'ascending' : 'descending') : 'none'}>
@@ -416,11 +422,11 @@ export function MyWorkPage() {
                         </span>
                       </th>
                     ))}
-                    <th className={thCls}></th>
+                    <th className={thCls}>{isMobile ? <span className="sr-only">Open</span> : null}</th>
                   </tr>
                   {/* Per-column filter row */}
                   <tr className="border-b border-[var(--color-border)] bg-white">
-                    {TABLE_COLS.map((c) => (
+                    {tableCols.map((c) => (
                       <th key={c.key} className="px-2 py-1.5">
                         <input
                           value={colFilters[c.key]}
@@ -440,20 +446,40 @@ export function MyWorkPage() {
                     const planned = i.dates.status === 'resolved' ? `${fmtDate(i.dates.start)} → ${fmtDate(i.dates.end)}` : 'Awaiting MRD'
                     return (
                       <tr key={`${i.row.id}-${i.part.partNo}`} className="border-b border-[var(--color-border)] last:border-0 hover:bg-secondary/40">
+                        {tableCols.map((c) => <Fragment key={c.key}>{({
+                          status: (
                         <td className="px-3 py-2.5">
                           <span className="inline-flex items-center gap-1.5 rounded-full px-2 py-0.5 text-[10px] font-medium"
                             style={{ background: `${WORK_BUCKET_COLORS[b]}1a`, color: WORK_BUCKET_COLORS[b] }}>
                             <span className="inline-block h-1.5 w-1.5 rounded-full" style={{ background: WORK_BUCKET_COLORS[b] }} />{b}
                           </span>
                         </td>
+                          ),
+                          partNo: (
                         <td className="px-3 py-2.5 font-mono text-[11px]">{i.part.partNo}</td>
+                          ),
+                          partName: (
                         <td className="px-3 py-2.5">{i.part.partName}</td>
+                          ),
+                          model: (
                         <td className="px-3 py-2.5 text-[12px]">{i.part.model}</td>
+                          ),
+                          department: (
                         <td className="px-3 py-2.5 text-[12px]">{i.part.department}</td>
+                          ),
+                          vendorName: (
                         <td className="px-3 py-2.5 text-[12px]">{i.part.vendorName}</td>
+                          ),
+                          milestoneId: (
                         <td className="px-3 py-2.5"><span className="rounded bg-secondary px-1.5 py-0.5 text-[10px] font-medium text-primary">{i.row.milestoneId}</span></td>
+                          ),
+                          activity: (
                         <td className="px-3 py-2.5 text-[12px]">{i.activity.name}</td>
+                          ),
+                          planned: (
                         <td className="px-3 py-2.5 whitespace-nowrap text-[11px] text-[var(--color-muted)]">{planned}</td>
+                          ),
+                        } as Record<TableColKey, React.ReactNode>)[c.key]}</Fragment>)}
                         <td className="px-3 py-2.5 text-right">
                           <Link
                             // Opens this part's form for this activity (the part drawer), not the whole part list.

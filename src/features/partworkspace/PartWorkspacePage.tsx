@@ -227,7 +227,8 @@ export function PartWorkspacePage() {
 
   // Scroll-spy: highlight the activity tab for whichever section is currently at the top of the scroll area.
   useEffect(() => {
-    const root = scrollBodyRef.current
+    // The page itself scrolls now, so observe against the app's main scroll area.
+    const root = scrollBodyRef.current ? document.getElementById('main-content') : null
     if (!root || sections.length === 0) return
     const obs = new IntersectionObserver(
       (entries) => {
@@ -252,8 +253,10 @@ export function PartWorkspacePage() {
   // Keep the active tab scrolled into view in the (horizontal) tab bar.
   useEffect(() => {
     if (!activeRow || !tabBarRef.current) return
-    const btn = tabBarRef.current.querySelector<HTMLElement>(`[data-tab="${activeRow}"]`)
-    btn?.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' })
+    const bar = tabBarRef.current
+    const btn = bar.querySelector<HTMLElement>(`[data-tab="${activeRow}"]`)
+    // Scroll only the tab strip sideways; scrollIntoView would also move the page and cancel a jump in progress.
+    if (btn) bar.scrollTo({ left: btn.offsetLeft - (bar.clientWidth - btn.offsetWidth) / 2, behavior: 'smooth' })
   }, [activeRow])
 
   function setDraftValue(rowId: string, key: string, value: any) {
@@ -305,7 +308,7 @@ export function PartWorkspacePage() {
   }
 
   return (
-    <div className="flex h-full flex-col">
+    <div className="flex flex-col">
       <PageHeader
         title="Part Workspace"
         section="Workspace"
@@ -416,9 +419,9 @@ export function PartWorkspacePage() {
           <p className="py-10 text-center text-sm text-[var(--color-muted)]">No activities apply to this part.</p>
         </Card>
       ) : (
-        <div className="flex min-h-0 flex-1 flex-col">
+        <div className="flex flex-col">
           {/* ── Activity jump tabs + progress scale + Save all (fixed) ─── */}
-          <div className="epmp-card mb-4 flex-none px-4 py-3">
+          <div className="epmp-card sticky top-0 z-10 mb-4 flex-none px-4 py-3">
             <div className="mb-2 flex flex-wrap items-center justify-between gap-3">
               {/* Completion scale: how many activities are complete out of the total */}
               <div className="flex min-w-0 items-center gap-3">
@@ -473,8 +476,8 @@ export function PartWorkspacePage() {
             </div>
           </div>
 
-          {/* ── Stacked activity sections (ONLY this area scrolls) ─────── */}
-          <div ref={scrollBodyRef} className="min-h-0 flex-1 space-y-4 overflow-y-auto pb-4">
+          {/* ── Stacked activity sections: scroll with the page (#main-content), not in a nested box ── */}
+          <div ref={scrollBodyRef} className="space-y-4 pb-4">
             {shownSections.map((s, i) => {
               // Milestone (trial) divider before the first activity of each new milestone.
               const prev = shownSections[i - 1]
@@ -553,9 +556,9 @@ const ActivityCard = forwardRef<HTMLDivElement, ActivityCardProps>(function Acti
       : fmtOffsetRange(row)
 
   return (
-    <div ref={ref} data-rowid={rowId} className="epmp-card scroll-mt-4 p-0">
+    <div ref={ref} data-rowid={rowId} className="epmp-card scroll-mt-[150px] p-0">
       {/* Section header */}
-      <div className="flex flex-wrap items-center justify-between gap-2 border-b border-[var(--color-border)] bg-[var(--color-surface)] px-5 py-3">
+      <div className="flex flex-wrap items-center justify-between gap-2 border-b border-[var(--color-border)] bg-[var(--color-surface)] px-4 py-3 sm:px-5">
         <div>
           <h3 className="m-0 text-[15px] font-semibold text-[#101828]">{activity.name}</h3>
           <p className="mt-0.5 text-[11px] text-[var(--color-muted)]">
@@ -566,7 +569,7 @@ const ActivityCard = forwardRef<HTMLDivElement, ActivityCardProps>(function Acti
       </div>
 
       {/* Fields */}
-      <div className="px-5 py-4">
+      <div className="px-4 py-4 sm:px-5">
         {isNa ? (
           <p className="py-4 text-center text-[12px] text-[var(--color-muted)]">
             Marked Not applicable{entry?.notApplicable?.reason ? ` — ${entry.notApplicable.reason}` : ''}.
@@ -601,7 +604,7 @@ const ActivityCard = forwardRef<HTMLDivElement, ActivityCardProps>(function Acti
 
       {/* Section actions */}
       {!isNa && canEnter && (
-        <div className="flex items-center justify-end gap-2 border-t border-[var(--color-border)] px-5 py-3">
+        <div className="flex items-center justify-end gap-2 border-t border-[var(--color-border)] px-4 py-3 sm:px-5 max-sm:[&>button]:flex-1">
           <Button variant="secondary" size="sm" onClick={onSave}>Save draft</Button>
           <Button variant="primary" size="sm" onClick={onSubmit}>Save & submit</Button>
         </div>

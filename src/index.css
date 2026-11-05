@@ -216,3 +216,19 @@ input:focus-visible, select:focus-visible, textarea:focus-visible {
   z-index: 6;
   background: #fff;
 }
+
+/* ── Mobile table sleeves (≤1023 px): first column pinned left, last (Open) column pinned right.
+   Use on a horizontal scroll wrapper (`.tbl-sleeve overflow-x-auto`). Other columns scroll underneath. */
+@media (max-width: 1023px) {
+  .tbl-sleeve > table { width: max-content; min-width: 100%; }
+  .tbl-sleeve th:first-child, .tbl-sleeve td:first-child { position: sticky; left: 0; z-index: 3; background: #fff; box-shadow: inset -1px 0 0 var(--color-border); max-width: 150px; white-space: normal; }
+  .tbl-sleeve th:last-child, .tbl-sleeve td:last-child { position: sticky; right: 0; z-index: 3; background: #fff; box-shadow: inset 1px 0 0 var(--color-border), -6px 0 8px -6px rgba(16,24,40,.18); }
+  .tbl-sleeve thead tr:first-child th:first-child, .tbl-sleeve thead tr:first-child th:last-child { background: var(--color-table-head); z-index: 7; }
+  .tbl-sleeve thead th:first-child, .tbl-sleeve thead th:last-child { z-index: 7; }
+  .tbl-sleeve td[colspan] { position: static; box-shadow: none; }
+}
+@media (max-width: 1023px) {
+  /* Right-only sleeve: only the Open column is pinned. */
+  .tbl-sleeve.tbl-sleeve-r th:first-child, .tbl-sleeve.tbl-sleeve-r td:first-child { position: static; box-shadow: none; max-width: none; background: transparent; }
+  .tbl-sleeve.tbl-sleeve-r thead th { background: var(--color-table-head); }
+}
