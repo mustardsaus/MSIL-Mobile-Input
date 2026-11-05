@@ -254,8 +254,11 @@ export function AppLayout() {
               <span className="truncate">Prototype · mock data · no backend</span>
             </div>
           </div>
-          <div className="ml-auto flex flex-none items-center gap-3 sm:gap-4" data-tour="persona-switcher">
+          {/* Below lg the sample-data buttons take their own row so the bell and persona switcher stay on screen. */}
+          <div className="max-lg:order-last max-lg:w-full max-lg:[&>div]:flex-wrap lg:ml-auto">
             <SampleDataButton />
+          </div>
+          <div className="ml-auto flex flex-none items-center gap-3 sm:gap-4 lg:ml-0" data-tour="persona-switcher">
             <NotificationBell />
             <PersonaSwitcher />
           </div>
