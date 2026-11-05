@@ -1,3 +1,4 @@
+import { Icon as FbIcon } from '../../components/Icon'
 import { useMemo, useState } from 'react'
 import { Link, useOutletContext } from 'react-router-dom'
 import type { AppOutletContext } from '../AppLayout'
@@ -226,7 +227,7 @@ export function HomePage() {
           aria-label="Start guided demo tour"
           className="inline-flex items-center gap-1.5 rounded-[10px] border border-[var(--color-border)] bg-white px-3.5 py-2 text-xs font-semibold text-[var(--color-primary)] hover:bg-secondary focus:outline-none focus-visible:ring-2 focus-visible:ring-[#bfdbfe]"
         >
-          ▶ Demo tour
+          <FbIcon name="play" size={14} className="mr-1" />Demo tour
         </button>
       </div>
 

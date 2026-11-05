@@ -1,3 +1,4 @@
+import { Icon as FbIcon } from '../../components/Icon'
 import { useState } from 'react'
 import { fetchFromEdoc } from '../../mock'
 import { Button, Modal } from '../../components'
@@ -76,7 +77,7 @@ export function DeviationPopup({
       <div className="space-y-4">
         {/* Explanation */}
         <div className="bg-[#fffbeb] border border-[#fde68a] rounded-lg px-4 py-3 text-sm text-[#92400e]">
-          <p className="font-medium mb-1">⚠ Actual date exceeds MRD</p>
+          <p className="font-medium mb-1"><FbIcon name="exclamation-circle" size={14} className="mr-1" />Actual date exceeds MRD</p>
           <p className="text-xs">
             Part <strong>{partNo}</strong> has an actual date that is beyond the MRD ({mrd}).
             A deviation E-Doc is required. Enter the E-Doc tracking number below to fetch the
@@ -103,7 +104,7 @@ export function DeviationPopup({
               onClick={handleFetch}
               disabled={loading}
             >
-              {loading ? '⟳ Fetching…' : '↻ Fetch status'}
+              <><FbIcon name="refresh" size={14} className="mr-1" />{loading ? 'Fetching…' : 'Fetch status'}</>
             </Button>
           </div>
           {error && <p className="text-xs text-destructive mt-1">{error}</p>}

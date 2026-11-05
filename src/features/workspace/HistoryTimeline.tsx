@@ -1,3 +1,5 @@
+import { Icon as FbIcon } from '../../components/Icon'
+import type { IconName } from '../../components/Icon'
 import type { HistoryLog } from '../../domain'
 import { PERSONAS } from '../../store/personaStore'
 
@@ -10,14 +12,14 @@ function personaColor(persona: string): string {
   return found?.hex ?? '#9ca3af'
 }
 
-function actionIcon(action: string): string {
+function actionIcon(action: string): IconName | null {
   const lower = action.toLowerCase()
-  if (lower.includes('approved') || lower.includes('approve')) return '✓'
-  if (lower.includes('sent back') || lower.includes('send back')) return '↩'
-  if (lower.includes('submitted') || lower.includes('submit')) return '↑'
-  if (lower.includes('edit')) return '✎'
-  if (lower.includes('draft') || lower.includes('init')) return '📝'
-  return '•'
+  if (lower.includes('approved') || lower.includes('approve')) return 'check'
+  if (lower.includes('sent back') || lower.includes('send back')) return 'undo'
+  if (lower.includes('submitted') || lower.includes('submit')) return 'chevron-up'
+  if (lower.includes('edit')) return 'pen'
+  if (lower.includes('draft') || lower.includes('init')) return 'file-lines'
+  return null
 }
 
 function actionColor(action: string): string {
@@ -48,7 +50,7 @@ export function HistoryTimeline({ history }: HistoryTimelineProps) {
   if (history.length === 0) {
     return (
       <div className="text-center py-12 text-[var(--color-muted)]">
-        <p className="text-2xl mb-2">📋</p>
+        <p className="mb-2 text-[var(--color-muted)]"><FbIcon name="clipboard-list" size={28} /></p>
         <p className="text-sm">No history yet for this entry.</p>
       </div>
     )
@@ -85,7 +87,7 @@ export function HistoryTimeline({ history }: HistoryTimelineProps) {
             <div className="pb-4 min-w-0 flex-1">
               <div className="flex items-center gap-2 flex-wrap">
                 <span className="text-sm font-medium" style={{ color: aColor }}>
-                  {icon} {log.action}
+                  {icon && <FbIcon name={icon} size={12} className="mr-1" />}{log.action}
                 </span>
                 <span
                   className="text-xs px-1.5 py-0.5 rounded font-medium"

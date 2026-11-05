@@ -1,3 +1,4 @@
+import { Icon as FbIcon } from '../../components/Icon'
 import { useState, useMemo } from 'react'
 import { useParams, Link, useSearchParams } from 'react-router-dom'
 import { useQAStore } from '../../store/qaStore'
@@ -239,7 +240,7 @@ export function WorkspacePage() {
   if (!row || !activity) {
     return (
       <div className="flex flex-col items-center justify-center py-20 text-[var(--color-muted)]">
-        <p className="text-4xl mb-3">🔍</p>
+        <p className="mb-3 text-[var(--color-muted)]"><FbIcon name="search" size={36} /></p>
         <p className="font-medium">Activity not found</p>
         <Link to="/activities" className="mt-4 text-sm text-[var(--color-accent)] hover:underline">← Back to Activities</Link>
       </div>
@@ -249,7 +250,7 @@ export function WorkspacePage() {
   if (!rowAllowed) {
     return (
       <div className="flex flex-col items-center justify-center py-20 text-[var(--color-muted)]">
-        <p className="text-4xl mb-3">🔒</p>
+        <p className="mb-3 text-[var(--color-muted)]"><FbIcon name="lock" size={36} /></p>
         <p className="font-medium">Not available for your role</p>
         <p className="text-sm mt-1">This activity belongs to section {row.section}, which is outside your scope.</p>
         <Link to="/activities" className="mt-4 text-sm text-[var(--color-accent)] hover:underline">← Back to Activities</Link>
@@ -352,7 +353,7 @@ export function WorkspacePage() {
             )}
             <div className="flex flex-wrap items-center gap-x-4 gap-y-2 mt-2 text-sm text-[var(--color-muted)]">
               <span>
-                📅{' '}
+                <FbIcon name="calendar-month" size={16} className="mr-1.5 text-[var(--color-muted)]" />
                 {dateRange ? `${fmtDate(dateRange.start)} → ${fmtDate(dateRange.end)}` : <em>Awaiting MRD</em>}
                 {awaitingCount > 0 && dateRange && ` (+${awaitingCount} awaiting MRD)`}
               </span>
@@ -363,26 +364,26 @@ export function WorkspacePage() {
 
           {/* RYG Summary + Completion */}
           <div className="flex items-center gap-6 flex-shrink-0 max-md:w-full max-md:justify-between max-md:border-t max-md:border-[var(--color-border)] max-md:pt-3">
-            <div className="flex flex-wrap items-center gap-3">
-              <div className="flex items-center gap-1">
-                <RygDot status="green" size={10} />
+            <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
+              <div className="flex items-center gap-1.5">
+                <RygDot status="green" size={12} />
                 <span className="text-sm text-[var(--color-muted)]">{rygSummary.green}</span>
               </div>
-              <div className="flex items-center gap-1">
-                <RygDot status="yellow" size={10} />
+              <div className="flex items-center gap-1.5">
+                <RygDot status="yellow" size={12} />
                 <span className="text-sm text-[var(--color-muted)]">{rygSummary.yellow}</span>
               </div>
-              <div className="flex items-center gap-1">
-                <RygDot status="red" size={10} />
+              <div className="flex items-center gap-1.5">
+                <RygDot status="red" size={12} />
                 <span className="text-sm text-[var(--color-muted)]">{rygSummary.red}</span>
               </div>
-              <div className="flex items-center gap-1" title="Awaiting MRD">
-                <RygDot status="grey" size={10} />
+              <div className="flex items-center gap-1.5" title="Awaiting MRD">
+                <RygDot status="grey" size={12} />
                 <span className="text-sm text-[var(--color-muted)]">{rygSummary.grey}</span>
               </div>
               {allowsNa || rygSummary.na > 0 ? (
-                <div className="flex items-center gap-1" title="Not applicable">
-                  <RygDot status="na" size={10} />
+                <div className="flex items-center gap-1.5" title="Not applicable">
+                  <RygDot status="na" size={12} />
                   <span className="text-sm text-[var(--color-muted)]">{rygSummary.na} N/A</span>
                 </div>
               ) : null}
@@ -476,7 +477,7 @@ export function WorkspacePage() {
             Clear filters
           </button>
         )}
-        <span className="ml-auto text-xs text-[var(--color-muted)]">
+        <span className="ml-auto inline-flex items-center whitespace-nowrap rounded-full bg-secondary px-2.5 py-0.5 text-xs font-medium text-primary">
           {filteredParts.length} of {applicableParts.length} parts
         </span>
       </div>
@@ -524,7 +525,7 @@ export function WorkspacePage() {
       <Card flush className="!overflow-visible">
         {filteredParts.length === 0 ? (
           <div className="text-center py-12 text-[var(--color-muted)]">
-            <p className="text-3xl mb-3">📋</p>
+            <p className="mb-3 text-[var(--color-muted)]"><FbIcon name="clipboard-list" size={32} /></p>
             <p className="font-medium">No parts match your filters</p>
           </div>
         ) : (

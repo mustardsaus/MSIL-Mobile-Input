@@ -1,3 +1,4 @@
+import { Icon as FbIcon } from '../../../components/Icon'
 /**
  * Step 2: Fields Designer
  *
@@ -151,7 +152,7 @@ export function FieldsStep({ draft, onChange }: FieldsStepProps) {
         <div className="flex flex-wrap gap-2">
           {COMMON_FIELDS.map((cf) => (
             <span key={cf.key} className="flex items-center gap-1 px-2.5 py-1 text-xs bg-[var(--color-surface)] border border-[var(--color-border)] rounded text-[var(--color-muted)]">
-              🔒 {cf.label}
+              <FbIcon name="lock" size={12} className="mr-1" />{cf.label}
             </span>
           ))}
         </div>
@@ -220,13 +221,13 @@ export function FieldsStep({ draft, onChange }: FieldsStepProps) {
                               disabled={idx === 0}
                               className="text-[10px] text-[var(--color-muted)] hover:text-[var(--color-text)] disabled:opacity-30 leading-none"
                               title="Move up"
-                            >▲</button>
+                            ><FbIcon name="chevron-up" size={14} /></button>
                             <button
                               onClick={() => moveDown(idx)}
                               disabled={idx === fields.length - 1}
                               className="text-[10px] text-[var(--color-muted)] hover:text-[var(--color-text)] disabled:opacity-30 leading-none"
                               title="Move down"
-                            >▼</button>
+                            ><FbIcon name="chevron-down" size={14} /></button>
                           </div>
                         </td>
 
@@ -439,7 +440,7 @@ export function FieldsStep({ draft, onChange }: FieldsStepProps) {
                               className="text-xs text-destructive hover:text-destructive"
                               title="Remove field"
                             >
-                              ✕
+                              <FbIcon name="close" size={14} />
                             </button>
                           </div>
                         </td>
@@ -517,7 +518,7 @@ function ValidationRulesEditor({ fields, rules, onChange }: { fields: FieldDefin
         <span key={k} className="inline-flex items-center gap-1 rounded bg-white px-1.5 py-0.5 text-[11px] ring-1 ring-[var(--color-border)]">
           {i > 0 && <span className="text-[var(--color-muted)]">+</span>}
           {options.find((o) => o.key === k)?.label ?? k}
-          <button type="button" onClick={() => set(list.filter((x) => x !== k))} aria-label="Remove" className="text-[var(--color-destructive)]">✕</button>
+          <button type="button" onClick={() => set(list.filter((x) => x !== k))} aria-label="Remove" className="text-[var(--color-destructive)]"><FbIcon name="close" size={14} /></button>
         </span>
       ))}
       <select value="" onChange={(e) => e.target.value && set([...list, e.target.value])} className={sel} aria-label="Add a field to this side">
@@ -1024,7 +1025,7 @@ function TableColumnsEditor({ field, onUpdate, allFields }: { field: FieldDefini
                   <td className="px-1 py-1">
                     {d?.from === 'count' && c.key === d.targetLabelColumn ? (
                       <span className="inline-block rounded bg-[#dcfce7] px-1.5 py-1 text-[10px] font-medium text-[#166534]" title="Filled by the system">
-                        {`🔗 from ${otherTableLabel(allFields, d.fieldKey)} › ${otherColLabel(allFields, d.fieldKey, d.labelColumn)}`}
+                        <><FbIcon name="link" size={12} className="mr-1" />{`from ${otherTableLabel(allFields, d.fieldKey)} › ${otherColLabel(allFields, d.fieldKey, d.labelColumn)}`}</>
                       </span>
                     ) : (
                     <select
@@ -1039,7 +1040,7 @@ function TableColumnsEditor({ field, onUpdate, allFields }: { field: FieldDefini
                     )}
                   </td>
                   <td className="px-1 py-1 text-center">
-                    <button type="button" onClick={() => removeCol(c.key)} className="text-destructive hover:underline">✕</button>
+                    <button type="button" onClick={() => removeCol(c.key)} className="text-destructive hover:underline" aria-label="Remove column"><FbIcon name="close" size={14} /></button>
                   </td>
                 </tr>
               ))}

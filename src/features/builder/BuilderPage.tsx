@@ -1,3 +1,4 @@
+import { Icon as FbIcon } from '../../components/Icon'
 /**
  * BuilderPage — landing page for the Builder area.
  * Shows existing drafts with options to continue or delete them.
@@ -34,7 +35,7 @@ export function BuilderPage() {
       {!isAdmin ? (
         <Card>
           <div className="text-center py-10 text-[var(--color-muted)]">
-            <p className="text-3xl mb-3">🔒</p>
+            <p className="mb-3 text-[var(--color-muted)]"><FbIcon name="lock" size={32} /></p>
             <p className="font-medium">Admin access required</p>
             <p className="text-sm mt-1">Switch to the <strong>Admin</strong> persona to create and edit activity definitions.</p>
           </div>
@@ -42,7 +43,7 @@ export function BuilderPage() {
       ) : drafts.length === 0 ? (
         <Card>
           <div className="text-center py-12 text-[var(--color-muted)]">
-            <p className="text-3xl mb-3">⚙</p>
+            <p className="mb-3 text-[var(--color-muted)]"><FbIcon name="cog" size={32} /></p>
             <p className="font-medium">No drafts in progress</p>
             <p className="text-sm mt-1">
               Click "+ New Definition" to start the 4-step wizard (Basics → Fields → Flow → Review).

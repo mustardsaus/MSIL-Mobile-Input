@@ -1,3 +1,4 @@
+import { Icon as FbIcon } from './Icon'
 import { useEffect } from 'react'
 
 interface DrawerProps {
@@ -56,7 +57,7 @@ export function Drawer({
               className="text-[var(--color-muted)] hover:text-[var(--color-text)] rounded p-1 focus:outline-none"
               aria-label="Close"
             >
-              ✕
+              <FbIcon name="close" size={18} />
             </button>
           </div>
         )}

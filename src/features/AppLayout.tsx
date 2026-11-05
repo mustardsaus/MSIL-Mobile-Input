@@ -1,7 +1,9 @@
+import { Icon as FbIcon } from '../components/Icon'
 import { useState } from 'react'
 import { NavLink, Outlet } from 'react-router-dom'
 import { PersonaSwitcher } from '../components/PersonaSwitcher'
 import { Modal } from '../components/Modal'
+import { useTableAxisLock } from '../hooks/useIsMobile'
 import { Button } from '../components/Button'
 import { usePersonaStore } from '../store/personaStore'
 import type { PersonaId } from '../store/personaStore'
@@ -32,10 +34,10 @@ function SampleDataButton() {
   return (
     <div className="flex flex-none items-center gap-2">
       <button type="button" onClick={() => setAsk('load')} className={cls} title="Temporary: rebuild sample parts from the current activity fields">
-        ⚠ Load sample parts (temp)
+        <FbIcon name="exclamation-circle" size={14} className="mr-1" />Load sample parts (temp)
       </button>
       <button type="button" onClick={() => setAsk('unload')} className={cls} title="Temporary: remove all parts and their activity data">
-        ⚠ Unload parts (temp)
+        <FbIcon name="exclamation-circle" size={14} className="mr-1" />Unload parts (temp)
       </button>
       <Modal
         open={ask !== null}
@@ -140,6 +142,7 @@ const NAV_ITEMS: NavItem[] = [
 ]
 
 export function AppLayout() {
+  useTableAxisLock()
   const [navCollapsed, setNavCollapsed] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
   // The tour lives here (not in HomePage) so it survives the route changes it triggers.

@@ -1,3 +1,4 @@
+import { Icon as FbIcon } from '../../components/Icon'
 import { useState, useEffect, useCallback, useMemo, useRef } from 'react'
 import type { ActivityDefinition, FieldDefinition, ActivityEntry, TemplateRow, PartRecord } from '../../domain'
 import { makeEntryId } from '../../domain'
@@ -752,7 +753,7 @@ export function PartDetailDrawer({ activity, row, partNo, onClose }: PartDetailD
               </p>
               {ngRounds.length === 0 ? (
                 <div className="rounded border border-dashed border-[var(--color-border)] py-8 text-center text-xs text-[var(--color-muted)]">
-                  No NG rounds. {isPic ? 'Use “✗ Mark NG” on a submitted entry to record one.' : ''}
+                  No NG rounds. {isPic ? 'Use “Mark NG” on a submitted entry to record one.' : ''}
                 </div>
               ) : (
                 <ol className="space-y-2">
@@ -1016,12 +1017,12 @@ export function PartDetailDrawer({ activity, row, partNo, onClose }: PartDetailD
                 className="w-full border border-[var(--color-border)] rounded px-2.5 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-[var(--color-accent)] mb-2"
               />
               <div className="flex flex-wrap gap-2">
-                <Button variant="primary" size="sm" onClick={handleApprove}>✓ Approve</Button>
-                <Button variant="secondary" size="sm" onClick={handlePicEdit}>✎ Edit</Button>
-                <Button variant="danger" size="sm" onClick={() => setShowSendBackModal(true)}>↩ Send back</Button>
+                <Button variant="primary" size="sm" onClick={handleApprove}><FbIcon name="check" size={14} className="mr-1" />Approve</Button>
+                <Button variant="secondary" size="sm" onClick={handlePicEdit}><FbIcon name="pen" size={14} className="mr-1" />Edit</Button>
+                <Button variant="danger" size="sm" onClick={() => setShowSendBackModal(true)}><FbIcon name="undo" size={14} className="mr-1" />Send back</Button>
                 {activity.trackNgRounds && (
                   <Button variant="danger" size="sm" onClick={() => setShowNgModal(true)} title="Reject this submission as NG and send it back for resubmission">
-                    ✗ Mark NG
+                    <FbIcon name="close" size={14} className="mr-1" />Mark NG
                   </Button>
                 )}
               </div>
@@ -1057,7 +1058,7 @@ export function PartDetailDrawer({ activity, row, partNo, onClose }: PartDetailD
           )}
 
           {entryState === 'Approved' && !isNa && (
-            <p className="mt-2 text-sm text-[#047857] font-medium">✓ Entry approved</p>
+            <p className="mt-2 text-sm text-[#047857] font-medium"><FbIcon name="check-circle" size={16} className="mr-1" />Entry approved</p>
           )}
 
           {!isPic && !canVendorEdit && !canPicEnter && entryState !== 'Approved' && !showReverseNa && (
@@ -1227,7 +1228,7 @@ function FormTab({
           <div key={field.key}>
             {sentBackComment && (
               <div className="mb-1 px-2 py-1 bg-[#fffbeb] border border-[#fde68a] rounded text-xs text-[#b45309]">
-                ⚠ Sent back: {sentBackComment}
+                <FbIcon name="exclamation-circle" size={14} className="mr-1" />Sent back: {sentBackComment}
               </div>
             )}
 
@@ -1264,7 +1265,7 @@ function FormTab({
                     </span>
                   )}
                   {fs?.error && (
-                    <span className="text-[10px] text-[#b45309]">⚠ Not available</span>
+                    <span className="text-[10px] text-[#b45309]"><FbIcon name="exclamation-circle" size={12} className="mr-1" />Not available</span>
                   )}
                   <button
                     type="button"
@@ -1272,7 +1273,7 @@ function FormTab({
                     disabled={fs?.loading}
                     className={`text-[10px] px-1.5 py-0.5 rounded border border-[var(--color-border)] text-[var(--color-muted)] hover:text-[var(--color-accent)] hover:border-[var(--color-accent)] transition-colors ${fs?.loading ? 'opacity-50 cursor-wait' : ''}`}
                   >
-                    {fs?.loading ? '⟳ Fetching…' : '↻ Refresh'}
+                    <><FbIcon name="refresh" size={12} className="mr-1" />{fs?.loading ? 'Fetching…' : 'Refresh'}</>
                   </button>
                 </div>
               )}

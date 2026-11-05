@@ -1,3 +1,4 @@
+import { Icon as FbIcon } from '../../components/Icon'
 import { useState, useEffect, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { usePersonaStore } from '../../store/personaStore'
@@ -266,7 +267,7 @@ export function DemoTour({ onClose }: DemoTourProps) {
               className="flex-shrink-0 text-[var(--color-muted)] hover:text-[var(--color-text)] text-lg leading-none p-1 rounded focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] focus:outline-none"
               aria-label="Close demo tour"
             >
-              ✕
+              <FbIcon name="close" size={16} />
             </button>
           </div>
 

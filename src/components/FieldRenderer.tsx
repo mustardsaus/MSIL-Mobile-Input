@@ -1,3 +1,4 @@
+import { Icon as FbIcon } from './Icon'
 /**
  * Field Renderer Registry
  *
@@ -287,7 +288,7 @@ export const fieldRendererRegistry: Record<string, FieldRendererEntry> = {
           disabled={disabled}
           className={`px-3 py-1.5 text-xs rounded border transition-colors ${value ? 'bg-[#fef2f2] border-[#fca5a5] text-destructive' : 'bg-white border-[var(--color-border)] text-[var(--color-muted)]'} ${disabled ? 'opacity-60 cursor-not-allowed' : ''}`}
         >
-          {value ? 'Flagged ✕' : 'Flag'}
+          {value ? <>Flagged <FbIcon name="close" size={12} className="ml-1" /></> : 'Flag'}
         </button>
       </FieldWrapper>
     ),
@@ -417,7 +418,7 @@ export const fieldRendererRegistry: Record<string, FieldRendererEntry> = {
                     })}
                     <td className="px-1 py-1 text-center">
                       {canAddRows && (
-                        <button type="button" onClick={() => removeRow(i)} className="text-[var(--color-destructive)] hover:underline text-xs" title="Remove row">✕</button>
+                        <button type="button" onClick={() => removeRow(i)} className="text-[var(--color-destructive)] hover:underline text-xs" title="Remove row" aria-label="Remove row"><FbIcon name="close" size={14} /></button>
                       )}
                     </td>
                   </tr>

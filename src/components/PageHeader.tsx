@@ -28,7 +28,7 @@ export function PageHeader({ title, description, section = 'Workspace', crumb, a
             <p className="mb-0 mt-1 max-w-[620px] text-xs leading-5 text-[var(--color-muted)]">{description}</p>
           )}
         </div>
-        {actions && <div className="flex flex-wrap items-center gap-2">{actions}</div>}
+        {actions && <div className="flex flex-wrap items-center gap-2 max-sm:w-full max-sm:[&_a]:whitespace-nowrap max-sm:[&_button]:whitespace-nowrap max-sm:[&_label]:whitespace-nowrap">{actions}</div>}
       </div>
     </>
   )

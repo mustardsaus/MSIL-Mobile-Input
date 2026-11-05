@@ -219,7 +219,7 @@ export function BulkEntryPage() {
         section="Workspace"
         description="One grid — parts down the rows, every activity's fields across the columns. The Part column and headers stay fixed; scroll right for more activities."
         actions={
-          <div className="flex items-center gap-3">
+          <div className="flex flex-wrap items-center gap-3">
             <UpcomingToggle />
             <Link to="/data-entry" className="inline-flex items-center rounded-[10px] border border-[var(--color-border)] bg-white px-3 py-1.5 text-[11px] font-semibold text-[var(--color-text)] hover:bg-[#fafafa]">
               ← Parts Data Entry

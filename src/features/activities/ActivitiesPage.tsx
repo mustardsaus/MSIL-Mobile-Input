@@ -1,3 +1,4 @@
+import { Icon as FbIcon } from '../../components/Icon'
 import { useMemo, useState } from 'react'
 import { useNavigate, useSearchParams, Link } from 'react-router-dom'
 import { useQAStore } from '../../store/qaStore'
@@ -148,7 +149,7 @@ export function ActivitiesPage() {
             : `${summaries.length} activit${summaries.length !== 1 ? 'ies' : 'y'} by milestone. Dates are calculated from each model's MRD. ${scopeNote}`
         }
         actions={
-          <div className="flex items-center gap-3">
+          <div className="flex flex-wrap items-center gap-3">
             <UpcomingToggle />
             <Link to="/data-entry" className="inline-flex items-center rounded-[10px] border border-[var(--color-border)] bg-white px-3 py-1.5 text-[11px] font-semibold text-[var(--color-text)] hover:bg-[#fafafa]">
               ← Parts Data Entry
@@ -170,7 +171,7 @@ export function ActivitiesPage() {
       {!isAdmin && (
         <>
       {/* Filters — EPMP filter card */}
-      <section className="epmp-card mb-4 flex flex-wrap items-center gap-3 px-4 py-3.5">
+      <section className="epmp-card mb-4 flex flex-wrap items-center gap-3 px-4 py-3.5 max-sm:grid max-sm:grid-cols-1 max-sm:[&>*]:w-full">
         <input
           type="text"
           placeholder="Search activities…"
@@ -217,7 +218,7 @@ export function ActivitiesPage() {
       <Card flush className="!overflow-visible">
         {filtered.length === 0 ? (
           <div className="text-center py-12 text-[var(--color-muted)]">
-            <p className="text-3xl mb-3">☑</p>
+            <p className="mb-3 text-[var(--color-muted)]"><FbIcon name="check-circle" size={32} /></p>
             <p className="font-medium">
               {summaries.length === 0 ? 'No activities have been assigned to you yet' : 'No activities match your filters'}
             </p>

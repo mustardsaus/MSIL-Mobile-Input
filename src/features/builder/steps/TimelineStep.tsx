@@ -1,3 +1,4 @@
+import { Icon as FbIcon } from '../../../components/Icon'
 import type { BuilderDraft, TechnicalCategory, MrdSubType, TimelineTemplateEntry, TimelineOffset } from '../../../domain'
 import {
   TECHNICAL_CATEGORIES,
@@ -75,7 +76,7 @@ export function TimelineStep({ draft, onChange }: Props) {
                     : 'border-[var(--color-border)] bg-white text-[#344054] hover:border-[#bfdbfe]'
                 }`}
               >
-                {on ? '✓ ' : ''}{c.label}
+                {on ? <FbIcon name="check" size={12} className="mr-1" /> : null}{c.label}
               </button>
             )
           })}

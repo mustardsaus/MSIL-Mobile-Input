@@ -1,3 +1,4 @@
+import { Icon as FbIcon } from './Icon'
 import { useEffect, useRef } from 'react'
 
 interface ModalProps {
@@ -51,7 +52,7 @@ export function Modal({ open, onClose, title, children, footer, size = 'md' }: M
               className="flex h-7 w-7 items-center justify-center rounded-lg text-[var(--color-muted)] hover:bg-[var(--color-surface)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#bfdbfe]"
               aria-label="Close"
             >
-              ✕
+              <FbIcon name="close" size={18} />
             </button>
           </div>
         )}

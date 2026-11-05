@@ -124,8 +124,8 @@ export function ReleasePanel() {
 
   return (
     <section className="mb-4" aria-label="Part release status">
-      <div className="mb-2 flex items-baseline justify-between">
-        <h2 className="text-[13px] font-semibold text-[var(--color-text)]">{isVendor ? 'Parts released to you' : 'Release to vendor'}</h2>
+      <div className="mb-2 flex items-baseline justify-between gap-3 max-sm:flex-col max-sm:gap-1">
+        <h2 className="text-[13px] font-semibold whitespace-nowrap text-[var(--color-text)]">{isVendor ? 'Parts released to you' : 'Release to vendor'}</h2>
         <span className="text-[11px] text-[var(--color-muted)]">
           {isVendor
             ? 'Acknowledge a part to start work on it, or return it to the PIC with a reason.'

@@ -1,3 +1,4 @@
+import { Icon as FbIcon } from '../../components/Icon'
 import { useMemo, useState } from 'react'
 import {
   ResponsiveContainer, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, LineChart, Line, Cell
@@ -305,7 +306,7 @@ function WidgetBuilder({
                       : 'border-[var(--color-border)] bg-white text-[var(--color-text)]'
                   }`}
                 >
-                  {DISPLAY_LABELS[d]}{i === 0 ? ' ★' : ''}
+                  {DISPLAY_LABELS[d]}{i === 0 ? <FbIcon name="star" size={12} className="ml-1" /> : null}
                 </button>
               ))}
             </div>

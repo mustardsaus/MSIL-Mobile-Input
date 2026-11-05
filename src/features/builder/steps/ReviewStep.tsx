@@ -1,3 +1,4 @@
+import { Icon as FbIcon } from '../../../components/Icon'
 /**
  * Step 4: Review & Publish
  *
@@ -188,13 +189,13 @@ export function ReviewStep({ draft, onPublish, publishing }: ReviewStepProps) {
         <div className="space-y-2">
           {errors.map((m, i) => (
             <div key={i} className="flex items-start gap-2 bg-[#fef2f2] border border-[#fecaca] rounded p-3 text-sm text-destructive">
-              <span className="text-destructive flex-shrink-0 font-bold">✕</span>
+              <span className="text-destructive flex-shrink-0 font-bold"><FbIcon name="close-circle" size={16} /></span>
               <span>{m.message}</span>
             </div>
           ))}
           {warnings.map((m, i) => (
             <div key={i} className="flex items-start gap-2 bg-[#fffbeb] border border-[#fde68a] rounded p-3 text-sm text-[#92400e]">
-              <span className="text-ryg-yellow flex-shrink-0 font-bold">⚠</span>
+              <span className="text-ryg-yellow flex-shrink-0 font-bold"><FbIcon name="exclamation-circle" size={16} /></span>
               <span>{m.message}</span>
             </div>
           ))}
@@ -203,7 +204,7 @@ export function ReviewStep({ draft, onPublish, publishing }: ReviewStepProps) {
 
       {messages.length === 0 && (
         <div className="flex items-center gap-2 bg-[#ecfdf5] border border-[#a7f3d0] rounded p-3 text-sm text-[#047857]">
-          <span className="text-[#059669] font-bold">✓</span>
+          <span className="text-[#059669] font-bold"><FbIcon name="check-circle" size={16} /></span>
           <span>All checks passed. Ready to publish.</span>
         </div>
       )}

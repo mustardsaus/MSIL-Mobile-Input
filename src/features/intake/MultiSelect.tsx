@@ -1,3 +1,4 @@
+import { Icon as FbIcon } from '../../components/Icon'
 import { useEffect, useRef, useState } from 'react'
 
 interface Props {
@@ -34,7 +35,7 @@ export function MultiSelect({ label, options, selected, onChange }: Props) {
           {label}
           {selected.length > 0 && <strong> · {selected.length}</strong>}
         </span>
-        <span aria-hidden>▾</span>
+        <FbIcon name="chevron-down" size={14} />
       </button>
       {open && (
         <div role="listbox" aria-multiselectable="true" className="absolute z-30 mt-1 max-h-64 min-w-[200px] overflow-auto rounded-lg border border-[var(--color-border)] bg-white p-1.5 shadow-lg">

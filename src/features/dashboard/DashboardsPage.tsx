@@ -1,3 +1,4 @@
+import { Icon as FbIcon } from '../../components/Icon'
 import { overlayFeed } from '../../mock/feed'
 import { useState, useMemo } from 'react'
 import GridLayout, { WidthProvider } from 'react-grid-layout/legacy'
@@ -440,7 +441,7 @@ export function DashboardsPage() {
   const handleExport = (format: 'PDF' | 'Excel') => {
     showToast(`Exporting dashboard config & aggregated metrics to ${format}... Please wait.`)
     setTimeout(() => {
-      showToast(`✓ Export to ${format} completed! (Downloaded to local mocks directory)`)
+      showToast(`Export to ${format} completed! (Downloaded to local mocks directory)`)
     }, 1500)
   }
 
@@ -477,7 +478,7 @@ export function DashboardsPage() {
                 : 'text-[var(--color-text)] hover:bg-[var(--color-surface)]'
             }`}
           >
-            📊 Global Milestone Overview
+            <FbIcon name="chart-mixed" size={16} className="mr-1.5" />Global Milestone Overview
           </button>
 
           <div className="border-t border-border my-2" />
@@ -537,7 +538,7 @@ export function DashboardsPage() {
                 }`}
                 title={`${d.name} — by ${d.commonality}`}
               >
-                🔀 {d.name}
+                <FbIcon name="shuffle" size={14} className="mr-1.5" />{d.name}
               </button>
             ))
           )}
@@ -569,7 +570,7 @@ export function DashboardsPage() {
                 rel="noopener noreferrer"
                 className="text-xs text-[var(--color-accent)] hover:underline whitespace-nowrap"
               >
-                Open in new tab ↗
+                Open in new tab
               </a>
             </div>
             <iframe
@@ -617,7 +618,7 @@ export function DashboardsPage() {
               <option value="default">Default Auto Layout</option>
               {currentSavedViews.map((v) => (
                 <option key={v.id} value={v.id}>
-                  👁 {v.name}
+                  <FbIcon name="eye" size={14} className="mr-1.5" />{v.name}
                 </option>
               ))}
             </select>
@@ -632,16 +633,16 @@ export function DashboardsPage() {
                   setActiveWidgetId(null)
                 }}
               >
-                {editMode ? '✓ Finish Customization' : '✎ Edit Layout'}
+                {editMode ? <><FbIcon name="check" size={14} className="mr-1" />Finish Customization</> : <><FbIcon name="pen" size={14} className="mr-1" />Edit Layout</>}
               </Button>
             )}
 
             {/* Export Actions */}
             <Button variant="secondary" size="sm" onClick={() => handleExport('PDF')}>
-              🖨 PDF
+              <FbIcon name="printer" size={14} className="mr-1" />PDF
             </Button>
             <Button variant="secondary" size="sm" onClick={() => handleExport('Excel')}>
-              📊 Excel
+              <FbIcon name="file-lines" size={14} className="mr-1" />Excel
             </Button>
           </div>
         </div>
@@ -650,7 +651,7 @@ export function DashboardsPage() {
         <div className="epmp-card p-4 mb-4">
           <div className="flex items-center justify-between border-b border-border pb-2 mb-3">
             <span className="text-xs font-bold text-[var(--color-text)] flex items-center gap-1.5">
-              <span>🔍</span> Global Dashboard Filters
+              <FbIcon name="search" size={16} /> Global Dashboard Filters
             </span>
             <button
               onClick={() => setFilters(EMPTY_FILTERS)}
@@ -785,7 +786,7 @@ export function DashboardsPage() {
                   aria-label={`Remove filter ${chip.label}`}
                   title="Remove this filter"
                 >
-                  ✕
+                  <FbIcon name="close" size={12} />
                 </button>
               </span>
             ))}
@@ -804,7 +805,7 @@ export function DashboardsPage() {
         {editMode && (
           <div className="bg-secondary border border-[#bfdbfe] rounded-lg p-3.5 mb-4 flex flex-wrap items-center justify-between gap-3 animate-fade-in text-xs">
             <div className="flex items-center gap-2">
-              <span className="font-bold text-primary">🛠 Configurator Toolbox:</span>
+              <span className="font-bold text-primary"><FbIcon name="tools" size={14} className="mr-1" />Configurator Toolbox:</span>
               <button
                 onClick={() => handleAddWidget('chart')}
                 className="bg-primary text-white border border-primary rounded px-2.5 py-1 hover:bg-[#1a43c9] transition-colors font-medium"
@@ -849,13 +850,13 @@ export function DashboardsPage() {
                 onClick={() => setShowSaveViewModal(true)}
                 className="bg-primary text-white rounded px-3 py-1 hover:bg-[#1a43c9] font-medium"
               >
-                💾 Save as Named View...
+                <FbIcon name="floppy-disk" size={14} className="mr-1" />Save as Named View...
               </button>
               <button
                 onClick={handleResetLayout}
                 className="bg-white border border-input text-ink-muted rounded px-3 py-1 hover:bg-surface font-medium"
               >
-                ↩ Reset to Auto Layout
+                <FbIcon name="undo" size={14} className="mr-1" />Reset to Auto Layout
               </button>
             </div>
           </div>
@@ -865,7 +866,7 @@ export function DashboardsPage() {
         {activeDashboard.widgets.length === 0 ? (
           <Card>
             <div className="text-center py-16 text-[var(--color-muted)]">
-              <p className="text-4xl mb-2">📋</p>
+              <p className="mb-2 text-[var(--color-muted)]"><FbIcon name="clipboard-list" size={36} /></p>
               <p className="font-medium">No widgets in this dashboard.</p>
               <p className="text-xs mt-1">Use "Edit Layout" and add widgets from the toolbox.</p>
             </div>
@@ -923,7 +924,7 @@ export function DashboardsPage() {
                         }}
                         className="p-1 hover:bg-surface text-ink-muted rounded text-xxs"
                       >
-                        ⚙ Props
+                        <FbIcon name="cog" size={12} className="mr-1" />Props
                       </button>
                       <button
                         title="Duplicate"
@@ -933,7 +934,7 @@ export function DashboardsPage() {
                         }}
                         className="p-1 hover:bg-surface text-ink-muted rounded text-xxs"
                       >
-                        🗐 Copy
+                        <FbIcon name="clipboard" size={12} className="mr-1" />Copy
                       </button>
                       <button
                         title="Remove"
@@ -943,7 +944,7 @@ export function DashboardsPage() {
                         }}
                         className="p-1 hover:bg-[#fef2f2] text-destructive rounded text-xxs"
                       >
-                        ✖ Del
+                        <FbIcon name="close" size={12} className="mr-1" />Del
                       </button>
                     </div>
                   )}
@@ -976,7 +977,7 @@ export function DashboardsPage() {
               onClick={() => setActiveWidgetId(null)}
               className="text-muted hover:text-ink-muted text-xs"
             >
-              ✖ Close
+              <FbIcon name="close" size={12} className="mr-1" />Close
             </button>
           </div>
 
@@ -1147,7 +1148,7 @@ export function DashboardsPage() {
 
             {/* Helper notes */}
             <div className="bg-surface border border-border p-2.5 rounded text-xxs text-muted mt-2 leading-relaxed">
-              <strong>💡 Widget Layout:</strong> Drag to position or grab the tiny bottom-right handle to resize cards. Values refresh live against global filters.
+              <strong><FbIcon name="lightbulb" size={14} className="mr-1" />Widget Layout:</strong> Drag to position or grab the tiny bottom-right handle to resize cards. Values refresh live against global filters.
             </div>
 
             {/* Duplicate & Delete Buttons */}

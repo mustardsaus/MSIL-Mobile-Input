@@ -1,3 +1,4 @@
+import { Icon as FbIcon } from '../../../components/Icon'
 /**
  * Step 3: Flow Designer
  *
@@ -259,18 +260,18 @@ export function FlowStep({ draft, onChange }: FlowStepProps) {
                           disabled={idx === 0}
                           className="text-xs text-[var(--color-muted)] hover:text-[var(--color-text)] disabled:opacity-30 px-1"
                           title="Move up"
-                        >▲</button>
+                        ><FbIcon name="chevron-up" size={14} /></button>
                         <button
                           onClick={() => moveDown(idx)}
                           disabled={idx === steps.length - 1}
                           className="text-xs text-[var(--color-muted)] hover:text-[var(--color-text)] disabled:opacity-30 px-1"
                           title="Move down"
-                        >▼</button>
+                        ><FbIcon name="chevron-down" size={14} /></button>
                         <button
                           onClick={() => removeStep(idx)}
                           className="text-xs text-destructive hover:text-destructive px-1"
                           title="Remove step"
-                        >✕</button>
+                        ><FbIcon name="close" size={14} /></button>
                       </div>
                     </div>
                   </div>

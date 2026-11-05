@@ -1,3 +1,4 @@
+import { Icon as FbIcon } from '../../components/Icon'
 import { useMemo, useRef, useState } from 'react'
 import type { KeyboardEvent } from 'react'
 import { Link, useParams, useSearchParams } from 'react-router-dom'
@@ -642,7 +643,7 @@ export function MyWorkGridPage() {
                         title="Copy the top value down — to the selected rows, or to every open row if none are selected"
                         aria-label={`Copy ${f.label} down`}
                       >
-                        ↓
+                        <FbIcon name="chevron-down" size={12} />
                       </button>
                     )}
                   </div>
@@ -681,7 +682,7 @@ export function MyWorkGridPage() {
                       />
                       <span>
                         <span className="block max-w-[190px] truncate font-medium text-[var(--color-text)]" title={inst.part.partName}>
-                          {m.dirty && <span className="mr-1 text-[var(--color-accent)]" title="Unsaved edits">●</span>}
+                          {m.dirty && <span className="mr-1 text-[var(--color-accent)]" title="Unsaved edits"><span className="inline-block h-2 w-2 rounded-full bg-current align-middle" /></span>}
                           {inst.part.partName}
                         </span>
                         <span className="font-mono text-[10px] text-[var(--color-muted)]">{inst.part.partNo}</span>
@@ -712,7 +713,7 @@ export function MyWorkGridPage() {
                           .map(([k, c]) => `${activity.fields.find((f) => f.key === k)?.label ?? k}: ${c}`)
                           .join('\n')}
                       >
-                        ⚠
+                        <FbIcon name="exclamation-circle" size={14} />
                       </span>
                     )}
                     {locked && !inst.notApplicable && <div className="mt-0.5 text-[10px]">{m.lock}</div>}

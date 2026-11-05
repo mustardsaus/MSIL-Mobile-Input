@@ -1,3 +1,4 @@
+import { Icon as FbIcon } from '../../components/Icon'
 /**
  * BuilderWizard
  *
@@ -132,7 +133,7 @@ export function BuilderWizard() {
   if (published) {
     return (
       <div className="flex flex-col items-center justify-center py-24 text-center">
-        <div className="text-4xl mb-4">✓</div>
+        <div className="mb-4 text-[#059669]"><FbIcon name="check-circle" size={40} /></div>
         <h2 className="text-xl font-semibold text-[var(--color-text)] mb-2">Activity Published!</h2>
         <p className="text-sm text-[var(--color-muted)]">Redirecting to Activities…</p>
       </div>
@@ -187,7 +188,7 @@ export function BuilderWizard() {
                     : 'bg-[var(--color-border)] text-[var(--color-muted)]'
                 }`}
               >
-                {isDone ? '✓' : step.number}
+                {isDone ? <FbIcon name="check" size={14} /> : step.number}
               </span>
               {step.label}
             </button>

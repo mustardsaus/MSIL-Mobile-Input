@@ -1,3 +1,4 @@
+import { Icon as FbIcon } from '../../components/Icon'
 import { Fragment, useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
 import {
@@ -394,7 +395,7 @@ export function MyWorkPage() {
                   </span>
                 ) : 'All parts'}
                 {selectedGroup ? <span className="text-[var(--color-muted)]"> · {selectedGroup}</span> : ''}
-                <span className="ml-2 text-[11px] font-normal text-[var(--color-muted)]">{tableRows.length} row{tableRows.length === 1 ? '' : 's'}</span>
+                <span className="ml-2 inline-flex items-center whitespace-nowrap rounded-full bg-secondary px-2 py-0.5 align-middle text-[11px] font-medium text-primary">{tableRows.length} row{tableRows.length === 1 ? '' : 's'}</span>
               </h3>
               <div className="ml-auto flex items-center gap-3">
                 {anyColFilter && (
@@ -418,7 +419,7 @@ export function MyWorkPage() {
                         aria-sort={sortKey === c.key ? (sortDir === 'asc' ? 'ascending' : 'descending') : 'none'}>
                         <span className="inline-flex items-center gap-1">
                           {c.label}
-                          <span className="text-[9px] text-[var(--color-accent)]">{sortKey === c.key ? (sortDir === 'asc' ? '▲' : '▼') : '↕'}</span>
+                          <span className="text-[var(--color-accent)]">{sortKey === c.key ? <FbIcon name={sortDir === 'asc' ? 'chevron-up' : 'chevron-down'} size={14} /> : <FbIcon name="caret-sort" size={14} className="opacity-60" />}</span>
                         </span>
                       </th>
                     ))}

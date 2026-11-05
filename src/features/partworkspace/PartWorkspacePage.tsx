@@ -1,3 +1,4 @@
+import { Icon as FbIcon } from '../../components/Icon'
 import { useMemo, useState, useEffect, useRef } from 'react'
 import { useSearchParams, Link } from 'react-router-dom'
 import { PageHeader, Card, Button, getFieldRenderer, SourceBadge, StatusPill } from '../../components'
@@ -328,7 +329,7 @@ export function PartWorkspacePage() {
         section="Workspace"
         description="Pick a part and fill every activity on one screen. Select more parts in the dropdown to save the same data to all of them at once."
         actions={
-          <div className="flex items-center gap-3">
+          <div className="flex flex-wrap items-center gap-3">
             <UpcomingToggle />
             <Link to="/data-entry" className="inline-flex items-center rounded-[10px] border border-[var(--color-border)] bg-white px-3 py-1.5 text-[11px] font-semibold text-[var(--color-text)] hover:bg-[#fafafa]">
               ← Parts Data Entry
@@ -410,7 +411,7 @@ export function PartWorkspacePage() {
               <ul className="mb-1 space-y-0.5">
                 {partPredictions.slice(0, 3).map((p) => (
                   <li key={p.activityId} className="text-[11px] font-medium text-[#92400e]">
-                    ⚠ Forecast · {p.activityName.split(' ').slice(0, 2).join(' ')}: {p.outcome} <span className="font-normal text-[var(--color-muted)]">({p.reasons[0]} · {p.confidence} confidence)</span>
+                    <FbIcon name="exclamation-circle" size={14} className="mr-1 -mt-0.5" />Forecast · {p.activityName.split(' ').slice(0, 2).join(' ')}: {p.outcome} <span className="font-normal text-[var(--color-muted)]">({p.reasons[0]} · {p.confidence} confidence)</span>
                   </li>
                 ))}
               </ul>
@@ -482,7 +483,7 @@ export function PartWorkspacePage() {
                             : 'border-[var(--color-border)] bg-white text-[#344054] hover:border-[#bfdbfe] hover:text-primary'
                         } ${active ? 'ring-2 ring-primary ring-offset-1' : ''}`}
                     >
-                      <span className="mr-1.5">{done ? '✓' : '○'}</span>
+                      <span className="mr-1.5">{done ? <FbIcon name="check-circle" size={14} /> : <span className="inline-block h-3 w-3 rounded-full border-[1.5px] border-current align-[-0.1em] opacity-60" />}</span>
                       {s.activity.name}{s.row.subType ? ` · ${s.row.subType}` : ''}
                     </button>
                   )
@@ -503,7 +504,7 @@ export function PartWorkspacePage() {
                   {showDivider && (
                     <div className="mb-2 flex items-center gap-2 pt-1">
                       <span className="rounded bg-secondary px-2.5 py-1 text-[11px] font-semibold text-primary">{s.row.milestoneId}</span>
-                      <span className="text-[11px] text-[var(--color-muted)]">{groupCount} activit{groupCount === 1 ? 'y' : 'ies'}</span>
+                      <span className="whitespace-nowrap rounded-full bg-[var(--color-surface)] px-2 py-0.5 text-[11px] font-medium text-[#475467]">{groupCount} activit{groupCount === 1 ? 'y' : 'ies'}</span>
                       <span className="h-px flex-1 bg-[var(--color-border)]" />
                     </div>
                   )}
@@ -590,7 +591,7 @@ const ActivityCard = forwardRef<HTMLDivElement, ActivityCardProps>(function Acti
             Marked Not applicable{entry?.notApplicable?.reason ? ` — ${entry.notApplicable.reason}` : ''}.
           </p>
         ) : (
-          <div className="grid grid-cols-1 gap-x-6 gap-y-4 md:grid-cols-2">
+          <div className="pw-fields grid grid-cols-1 gap-x-6 gap-y-5 md:grid-cols-2">
             {visibleFields.map((field) => {
               const isEditable = canEnter && canPersonaEdit(field, currentPersona, entry)
               const renderer = getFieldRenderer(field.type)
@@ -598,8 +599,8 @@ const ActivityCard = forwardRef<HTMLDivElement, ActivityCardProps>(function Acti
               const mandatory = conditional[field.key]?.mandatory
               return (
                 <div key={field.key} className="min-w-0">
-                  <div className="mb-1 flex items-center gap-1.5">
-                    <span className="text-[11px] font-medium text-[#344054]">
+                  <div className="mb-1.5 flex flex-wrap items-center gap-1.5">
+                    <span className="text-[12px] font-medium text-[#344054]">
                       {field.label}
                       {mandatory && <span className="text-red-500"> *</span>}
                     </span>
