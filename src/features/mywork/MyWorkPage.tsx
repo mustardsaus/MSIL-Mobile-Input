@@ -349,8 +349,8 @@ export function MyWorkPage() {
 
           {/* Graphical: stacked bars by the chosen dimension */}
           <Card className="mb-4">
-            <div className="mb-2 flex items-center justify-between">
-              <h3 className="text-[13px] font-semibold text-[var(--color-text)]">Workspace by {groupDimLabel}</h3>
+            <div className="mb-3 flex items-center justify-between gap-3">
+              <h3 className="whitespace-nowrap text-[13px] font-semibold text-[var(--color-text)]">Workspace by {groupDimLabel}</h3>
               <select value={groupDim} onChange={(e) => { setGroupDim(e.target.value as any); setSelectedGroup(null) }} className={`${filterCls} w-auto`}>
                 <option value="model">By Model</option>
                 <option value="vendor">By Vendor</option>
@@ -363,11 +363,13 @@ export function MyWorkPage() {
             ) : (
               <div style={{ height: Math.max(180, groups.length * 34 + 60) }}>
                 <ResponsiveContainer width="100%" height="100%">
-                  <BarChart data={groups} layout="vertical" margin={{ top: 4, right: 16, left: 8, bottom: 4 }}
+                  <BarChart data={groups} layout="vertical" margin={{ top: 4, right: 12, left: 0, bottom: 4 }}
                     barCategoryGap={8}>
                     <CartesianGrid strokeDasharray="3 3" horizontal={false} stroke="#f3f4f6" />
                     <XAxis type="number" stroke="#9ca3af" fontSize={10} allowDecimals={false} />
-                    <YAxis type="category" dataKey="key" stroke="#667085" fontSize={11} width={110} tickLine={false} />
+                    {/* Label column sized to the longest label so the bars use the rest of the card width */}
+                    <YAxis type="category" dataKey="key" stroke="#667085" fontSize={11} tickLine={false}
+                      width={Math.min(110, Math.max(48, Math.max(...groups.map((g) => String(g.key).length)) * 6.5 + 12))} />
                     <Tooltip contentStyle={{ fontSize: '11px', borderRadius: '6px' }} />
                     <Legend iconType="circle" iconSize={8} wrapperStyle={{ fontSize: '11px' }} />
                     {WORK_BUCKETS.map((b) => (
