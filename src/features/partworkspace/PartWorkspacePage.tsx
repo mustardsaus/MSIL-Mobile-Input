@@ -421,8 +421,8 @@ export function PartWorkspacePage() {
       ) : (
         <div className="flex flex-col">
           {/* ── Activity jump tabs + progress scale + Save all (fixed) ─── */}
-          <div className="epmp-card sticky top-0 z-10 mb-4 flex-none px-4 py-3">
-            <div className="mb-2 flex flex-wrap items-center justify-between gap-3">
+          <div className="epmp-card sticky top-0 z-10 mb-4 flex-none px-4 py-4">
+            <div className="mb-3 flex flex-wrap items-center justify-between gap-3">
               {/* Completion scale: how many activities are complete out of the total */}
               <div className="flex min-w-0 items-center gap-3">
                 <span className="whitespace-nowrap text-[12px] font-semibold text-[#101828]">
@@ -449,8 +449,8 @@ export function PartWorkspacePage() {
             {/* Horizontal scroller. Tabs show the full activity name; they size to content with a
                 min-width so roughly 4 are visible on a phone and the rest scroll into view. Wider
                 screens simply fit more before scrolling. */}
-            <div ref={tabBarRef} className="-mx-1 overflow-x-auto pb-1">
-              <div className="flex gap-2 px-1">
+            <div ref={tabBarRef} className="-mx-1 overflow-x-auto pb-2 pt-1">
+              <div className="flex gap-2 px-1 py-0.5">
                 {shownSections.map((s) => {
                   const done = completeByRow[s.row.id]
                   const active = activeRow === s.row.id
