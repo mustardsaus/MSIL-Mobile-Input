@@ -27,7 +27,7 @@ export function StatusPill({ status, size = 'md' }: StatusPillProps) {
   const padding = size === 'sm' ? 'px-2 py-1 text-[10px]' : 'px-2.5 py-1 text-[11px]'
   return (
     <span
-      className={`inline-flex items-center gap-1.5 whitespace-nowrap rounded-md border font-medium ${padding}`}
+      className={`inline-flex flex-none items-center gap-1.5 whitespace-nowrap rounded-md border font-medium ${padding}`}
       style={{ backgroundColor: meta.bg, color: meta.text, borderColor: meta.border }}
     >
       <span className="h-1.5 w-1.5 rounded-full bg-current" />

@@ -231,7 +231,7 @@ function VisitCard({
           <div className="flex items-center gap-2">
             <h3 className="text-[14px] font-semibold text-[var(--color-text)]">{visit.vendorName}</h3>
             <span className="rounded-full bg-secondary px-2 py-0.5 text-[10px] font-medium text-primary">{location}</span>
-            <span className={`rounded-full px-2 py-0.5 text-[10px] font-medium ${statusTone}`}>{visit.status}</span>
+            <span className={`whitespace-nowrap rounded-full px-2 py-0.5 text-[10px] font-medium ${statusTone}`}>{visit.status}</span>
           </div>
           <p className="mt-0.5 text-[11px] text-[var(--color-muted)]">
             <strong className="text-[var(--color-text)]">{visit.pic}</strong> · {fmtDate(visit.date)}

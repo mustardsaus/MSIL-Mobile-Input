@@ -236,7 +236,7 @@ export function LessonsPage() {
                   }
                   return (
                     <tr key={`${p.activityId}-${p.partNo}`} className="border-b border-[var(--color-border)] last:border-0 align-top">
-                      <td className="px-4 py-2.5"><span className={`rounded-full px-2 py-0.5 text-[10px] font-semibold ${rs[p.level]}`}>{p.level}</span></td>
+                      <td className="whitespace-nowrap px-4 py-2.5"><span className={`rounded-full px-2 py-0.5 text-[10px] font-semibold ${rs[p.level]}`}>{p.level}</span></td>
                       <td className="px-4 py-2.5"><div className="font-medium text-[#101828]">{p.partNo}</div><div className="text-[10px] text-[var(--color-muted)]">{p.vendorName}</div></td>
                       <td className="px-4 py-2.5">{p.activityName} <span className="text-[var(--color-muted)]">· {p.milestoneId}</span></td>
                       <td className="px-4 py-2.5 font-medium text-[#344054]">{p.outcome}</td>

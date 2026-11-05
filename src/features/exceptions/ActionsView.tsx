@@ -246,7 +246,7 @@ export function ActionsView() {
                           ))}
                         </select>
                       ) : (
-                        <span className={`rounded-full px-2 py-0.5 text-[10px] font-medium ${STATUS_STYLE[a.status]}`}>{a.status}</span>
+                        <span className={`whitespace-nowrap rounded-full px-2 py-0.5 text-[10px] font-medium ${STATUS_STYLE[a.status]}`}>{a.status}</span>
                       )}
                     </td>
                     <td className="px-3 py-2.5 text-right">

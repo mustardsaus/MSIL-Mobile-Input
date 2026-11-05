@@ -221,7 +221,7 @@ export function ReleasePanel() {
                       <td className="px-3 py-2">{part.model}</td>
                       <td className="px-3 py-2">{part.vendorName}</td>
                       <td className="px-3 py-2">
-                        <span className={`rounded-full px-2 py-0.5 text-[10px] font-medium ${STATE_PILL[state].cls}`}>{STATE_PILL[state].label}</span>
+                        <span className={`whitespace-nowrap rounded-full px-2 py-0.5 text-[10px] font-medium ${STATE_PILL[state].cls}`}>{STATE_PILL[state].label}</span>
                       </td>
                       <td className="max-w-[360px] px-3 py-2 text-[11px] text-[var(--color-muted)]">
                         {state === 'Returned' && ret

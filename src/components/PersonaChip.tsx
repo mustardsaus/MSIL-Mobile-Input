@@ -13,7 +13,7 @@ export function PersonaChip({ personaId, size = 'md' }: PersonaChipProps) {
 
   return (
     <span
-      className={`inline-flex items-center rounded-full font-medium ${padding}`}
+      className={`inline-flex flex-none items-center whitespace-nowrap rounded-full font-medium ${padding}`}
       style={{
         backgroundColor: meta.hex + '26', // 15% opacity
         color: meta.hex,

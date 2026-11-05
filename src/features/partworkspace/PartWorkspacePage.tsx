@@ -219,6 +219,20 @@ export function PartWorkspacePage() {
   const scrollBodyRef = useRef<HTMLDivElement | null>(null)
   const tabBarRef = useRef<HTMLDivElement | null>(null)
   const [activeRow, setActiveRow] = useState<string | null>(null)
+  // The sticky activity bar squares its top corners once it is pinned, so cards scrolling underneath don't show at the corners.
+  const stickSentinel = useRef<HTMLDivElement | null>(null)
+  const [stuck, setStuck] = useState(false)
+  useEffect(() => {
+    const root = document.getElementById('main-content')
+    if (!root) return
+    const check = () => {
+      const node = stickSentinel.current
+      setStuck(!!node && node.getBoundingClientRect().top < root.getBoundingClientRect().top)
+    }
+    check()
+    root.addEventListener('scroll', check, { passive: true })
+    return () => root.removeEventListener('scroll', check)
+  }, [partNo, sections.length])
 
   const jumpTo = (rowId: string) => {
     sectionRefs.current[rowId]?.scrollIntoView({ behavior: 'smooth', block: 'start' })
@@ -421,15 +435,16 @@ export function PartWorkspacePage() {
       ) : (
         <div className="flex flex-col">
           {/* ── Activity jump tabs + progress scale + Save all (fixed) ─── */}
-          <div className="epmp-card sticky top-0 z-10 mb-4 flex-none px-4 py-4">
-            <div className="mb-3 flex flex-wrap items-center justify-between gap-3">
+          <div ref={stickSentinel} aria-hidden="true" className="h-px -mb-px" />
+          <div className={`epmp-card sticky -top-1 z-10 mb-4 flex-none px-4 py-4 ${stuck ? 'rounded-t-none shadow-[0_6px_16px_-8px_rgba(16,24,40,.25)]' : ''}`}>
+            <div className="mb-3 flex items-center justify-between gap-3 max-sm:flex-nowrap sm:flex-wrap">
               {/* Completion scale: how many activities are complete out of the total */}
-              <div className="flex min-w-0 items-center gap-3">
+              <div className="flex min-w-0 flex-1 items-center gap-3 sm:flex-none">
                 <span className="whitespace-nowrap text-[12px] font-semibold text-[#101828]">
                   <span className="text-emerald-700">{completedCount}</span>
-                  <span className="text-[var(--color-muted)]"> of {sections.length} activities complete</span>
+                  <span className="text-[var(--color-muted)]"> of {sections.length}<span className="max-sm:hidden"> activities</span> complete</span>
                 </span>
-                <div className="h-2 w-40 max-w-[40vw] overflow-hidden rounded-full bg-[var(--color-border)]">
+                <div className="h-2 w-40 max-w-[40vw] overflow-hidden rounded-full bg-[var(--color-border)] max-sm:w-auto max-sm:min-w-[40px] max-sm:max-w-none max-sm:flex-1">
                   <div
                     className="h-full rounded-full bg-emerald-500 transition-all"
                     style={{ width: `${sections.length ? Math.round((completedCount / sections.length) * 100) : 0}%` }}
@@ -449,8 +464,8 @@ export function PartWorkspacePage() {
             {/* Horizontal scroller. Tabs show the full activity name; they size to content with a
                 min-width so roughly 4 are visible on a phone and the rest scroll into view. Wider
                 screens simply fit more before scrolling. */}
-            <div ref={tabBarRef} className="-mx-1 overflow-x-auto pb-2 pt-1">
-              <div className="flex gap-2 px-1 py-0.5">
+            <div ref={tabBarRef} className="-mx-1 overflow-x-auto pb-2 pt-1 max-sm:-mx-4 max-sm:scroll-px-4">
+              <div className="flex gap-2 px-1 py-0.5 max-sm:px-4">
                 {shownSections.map((s) => {
                   const done = completeByRow[s.row.id]
                   const active = activeRow === s.row.id
@@ -460,7 +475,7 @@ export function PartWorkspacePage() {
                       data-tab={s.row.id}
                       onClick={() => jumpTo(s.row.id)}
                       title={s.activity.name}
-                      className={`flex-none min-w-[22vw] max-w-[60vw] sm:min-w-[160px] sm:max-w-none whitespace-nowrap
+                      className={`flex-none min-w-[22vw] sm:min-w-[160px] whitespace-nowrap
                         rounded-lg border px-3 py-2 text-left text-[11px] font-medium transition-colors ${
                           done
                             ? 'border-emerald-300 bg-emerald-50 text-emerald-800 hover:bg-emerald-100'

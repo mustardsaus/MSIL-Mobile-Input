@@ -224,7 +224,11 @@ input:focus-visible, select:focus-visible, textarea:focus-visible {
   .tbl-sleeve th:first-child, .tbl-sleeve td:first-child { position: sticky; left: 0; z-index: 3; background: #fff; box-shadow: inset -1px 0 0 var(--color-border); max-width: 150px; white-space: normal; }
   .tbl-sleeve th:last-child, .tbl-sleeve td:last-child { position: sticky; right: 0; z-index: 3; background: #fff; box-shadow: inset 1px 0 0 var(--color-border), -6px 0 8px -6px rgba(16,24,40,.18); }
   .tbl-sleeve thead tr:first-child th:first-child, .tbl-sleeve thead tr:first-child th:last-child { background: var(--color-table-head); z-index: 7; }
-  .tbl-sleeve thead th:first-child, .tbl-sleeve thead th:last-child { z-index: 7; }
+  /* Pinned header cells must sit above the scrolling header cells (which are also sticky, z-index 5–6). */
+  .tbl-sleeve thead th:first-child, .tbl-sleeve thead th:last-child { z-index: 8 !important; }
+  .tbl-sleeve tbody td:first-child, .tbl-sleeve tbody td:last-child { z-index: 4; }
+  /* Touch screens: no sticky hover tint that leaves pinned cells mismatched. */
+  @media (hover: none) { .tbl-sleeve tbody tr:hover { background: transparent; } }
   .tbl-sleeve td[colspan] { position: static; box-shadow: none; }
 }
 @media (max-width: 1023px) {

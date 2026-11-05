@@ -759,7 +759,7 @@ export function PartDetailDrawer({ activity, row, partNo, onClose }: PartDetailD
                     <li key={r.round} className={`rounded-lg border px-3 py-2 ${r.resolvedAt ? 'border-[var(--color-border)] bg-[var(--color-surface)]' : 'border-[#fca5a5] bg-[#fef2f2]'}`}>
                       <div className="flex items-center justify-between text-xs">
                         <span className="font-semibold text-[var(--color-text)]">Round {r.round}</span>
-                        <span className={`rounded-full px-1.5 py-0.5 text-[10px] font-medium ${r.resolvedAt ? 'bg-[#dcfce7] text-[#166534]' : 'bg-[#fee2e2] text-[#b91c1c]'}`}>
+                        <span className={`whitespace-nowrap rounded-full px-1.5 py-0.5 text-[10px] font-medium ${r.resolvedAt ? 'bg-[#dcfce7] text-[#166534]' : 'bg-[#fee2e2] text-[#b91c1c]'}`}>
                           {r.resolvedAt ? 'Cleared' : 'Open — awaiting resubmission'}
                         </span>
                       </div>
@@ -866,7 +866,7 @@ export function PartDetailDrawer({ activity, row, partNo, onClose }: PartDetailD
                           <div className="min-w-0 flex-1">
                             <div className="flex items-center gap-2">
                               <span className="text-[13px] font-medium text-[var(--color-text)]">{a.title}</span>
-                              <span className={`rounded-full px-1.5 py-0.5 text-[10px] font-medium ${
+                              <span className={`whitespace-nowrap rounded-full px-1.5 py-0.5 text-[10px] font-medium ${
                                 a.status === 'Done' ? 'bg-emerald-100 text-emerald-800'
                                 : a.status === 'In progress' ? 'bg-amber-100 text-amber-800'
                                 : 'bg-slate-100 text-slate-600'}`}>{a.status}</span>
@@ -961,7 +961,7 @@ export function PartDetailDrawer({ activity, row, partNo, onClose }: PartDetailD
                           <div className="min-w-0 flex-1">
                             <div className="flex items-center gap-2">
                               <span className="text-[13px] font-medium text-[var(--color-text)]">{d.title}</span>
-                              <span className={`rounded-full px-1.5 py-0.5 text-[10px] font-medium ${statusTone}`}>{d.status}</span>
+                              <span className={`whitespace-nowrap rounded-full px-1.5 py-0.5 text-[10px] font-medium ${statusTone}`}>{d.status}</span>
                             </div>
                             {d.description && <p className="mt-0.5 text-[11px] text-[var(--color-muted)]">{d.description}</p>}
                             <div className="mt-1.5 flex items-center gap-1">

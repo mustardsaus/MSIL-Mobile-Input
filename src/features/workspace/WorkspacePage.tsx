@@ -327,10 +327,11 @@ export function WorkspacePage() {
       </nav>
 
       {/* Header */}
-      <div className="epmp-card px-6 py-5 mb-5">
+      <div className="epmp-card px-6 py-5 mb-5 max-sm:px-4 max-sm:py-4">
         <div className="flex flex-wrap items-start justify-between gap-4">
-          <div className="flex-1 min-w-0">
-            <div className="flex items-center gap-2 mb-1">
+          {/* Mobile: the title block takes the full width; the RYG counts and % sit on their own row below. */}
+          <div className="flex-1 min-w-0 max-md:basis-full">
+            <div className="flex flex-wrap items-center gap-x-2 gap-y-1 mb-1">
               <span className="text-xs font-medium bg-secondary text-primary px-2 py-0.5 rounded">
                 {row.milestoneId}
               </span>
@@ -342,14 +343,14 @@ export function WorkspacePage() {
                 {activity.scope === 'Both' ? 'New Part + ECN' : activity.scope === 'NewPart' ? 'New Part' : 'ECN'}
               </span>
             </div>
-            <h1 className="m-0 text-[23px] font-semibold leading-8 tracking-[-0.3px] text-[var(--color-text)]">
+            <h1 className="m-0 text-[23px] font-semibold leading-8 tracking-[-0.3px] text-[var(--color-text)] max-sm:text-[20px] max-sm:leading-7">
               {activity.name}
               {row.subType && <span className="ml-2 align-middle rounded bg-secondary px-2 py-0.5 text-xs font-semibold text-primary">{row.milestoneId} · {row.subType}</span>}
             </h1>
             {activity.description && (
               <p className="text-sm text-[var(--color-muted)] mt-1">{activity.description}</p>
             )}
-            <div className="flex items-center gap-4 mt-2 text-sm text-[var(--color-muted)]">
+            <div className="flex flex-wrap items-center gap-x-4 gap-y-2 mt-2 text-sm text-[var(--color-muted)]">
               <span>
                 📅{' '}
                 {dateRange ? `${fmtDate(dateRange.start)} → ${fmtDate(dateRange.end)}` : <em>Awaiting MRD</em>}
@@ -361,8 +362,8 @@ export function WorkspacePage() {
           </div>
 
           {/* RYG Summary + Completion */}
-          <div className="flex items-center gap-6 flex-shrink-0">
-            <div className="flex items-center gap-3">
+          <div className="flex items-center gap-6 flex-shrink-0 max-md:w-full max-md:justify-between max-md:border-t max-md:border-[var(--color-border)] max-md:pt-3">
+            <div className="flex flex-wrap items-center gap-3">
               <div className="flex items-center gap-1">
                 <RygDot status="green" size={10} />
                 <span className="text-sm text-[var(--color-muted)]">{rygSummary.green}</span>
@@ -400,8 +401,8 @@ export function WorkspacePage() {
         </div>
       </div>
 
-      {/* Filters row */}
-      <div className="flex flex-wrap gap-2 mb-3 items-center">
+      {/* Filters row (mobile: an even two-column grid; count and Clear span the full width) */}
+      <div className="flex flex-wrap gap-2 mb-3 items-center max-sm:grid max-sm:grid-cols-2 max-sm:[&>select]:w-full max-sm:[&>button]:col-span-2 max-sm:[&>button]:text-left max-sm:[&>span]:col-span-2 max-sm:[&>span]:text-right">
         <select
           value={modelFilter}
           onChange={(e) => setModelFilter(e.target.value)}

@@ -175,7 +175,7 @@ export function DeviationsView() {
                     </td>
                     <td className="px-3 py-2.5 text-[12px]">{r.stageRole || '—'}</td>
                     <td className="px-3 py-2.5">
-                      <span className={`rounded-full px-2 py-0.5 text-[10px] font-medium ${STATUS_STYLE[d.status]}`}>{d.status}</span>
+                      <span className={`whitespace-nowrap rounded-full px-2 py-0.5 text-[10px] font-medium ${STATUS_STYLE[d.status]}`}>{d.status}</span>
                     </td>
                     <td className="px-3 py-2.5 text-[11px] font-mono">{d.edocNumber || '—'}</td>
                     <td className="px-3 py-2.5 whitespace-nowrap text-[11px] text-[var(--color-muted)]">{d.targetDate ? fmtDate(d.targetDate) : '—'}</td>

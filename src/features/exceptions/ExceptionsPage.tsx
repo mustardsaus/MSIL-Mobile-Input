@@ -116,7 +116,7 @@ function ExceptionsBody({ filters, onFilters }: { filters: ExcFilters; onFilters
                     {attention.slice(0, 60).map((a) => (
                       <tr key={a.type + a.key} className="border-b border-[var(--color-border)] last:border-0 hover:bg-secondary/40">
                         <td className="w-24 px-4 py-2.5">
-                          <span className={`rounded-full px-2 py-0.5 text-[10px] font-medium ${TYPE_STYLE[a.type]}`}>{a.type}</span>
+                          <span className={`whitespace-nowrap rounded-full px-2 py-0.5 text-[10px] font-medium ${TYPE_STYLE[a.type]}`}>{a.type}</span>
                         </td>
                         <td className="px-3 py-2.5">
                           <div className="font-medium text-[#101828]">{a.title}</div>

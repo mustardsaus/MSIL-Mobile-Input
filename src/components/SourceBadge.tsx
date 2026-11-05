@@ -34,7 +34,7 @@ export function SourceBadge({ source, size = 'md' }: SourceBadgeProps) {
   const cls = size === 'sm' ? 'text-[10px] px-1 py-0.5' : 'text-xs px-1.5 py-0.5'
   return (
     <span
-      className={`inline-flex items-center rounded font-medium ${cls}`}
+      className={`inline-flex flex-none items-center whitespace-nowrap rounded font-medium ${cls}`}
       style={{
         backgroundColor: meta.color + '20',
         color: meta.color,

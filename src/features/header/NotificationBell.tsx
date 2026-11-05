@@ -92,7 +92,7 @@ export function NotificationBell() {
                   onClick={() => setOpen(false)}
                   className="flex items-start gap-2.5 rounded-lg px-2 py-2 hover:bg-[var(--color-secondary)] focus:bg-[var(--color-secondary)] focus:outline-none"
                 >
-                  <span className={`mt-0.5 flex-none rounded-full px-2 py-0.5 text-[9.5px] font-semibold ${TAG_STYLE[n.tag] ?? 'bg-slate-100 text-slate-700'}`}>{n.tag}</span>
+                  <span className={`whitespace-nowrap mt-0.5 flex-none rounded-full px-2 py-0.5 text-[9.5px] font-semibold ${TAG_STYLE[n.tag] ?? 'bg-slate-100 text-slate-700'}`}>{n.tag}</span>
                   <span className="min-w-0 flex-1">
                     <span className="block truncate text-[12px] font-medium text-[var(--color-text)]">{n.title}</span>
                     <span className="block truncate text-[10.5px] text-[var(--color-muted)]">{n.sub}</span>

@@ -43,7 +43,7 @@ const TABLE_COLS: { key: TableColKey; label: string }[] = [
 
 function Chip({ n, label, tone }: { n: number; label: string; tone: string }) {
   if (n === 0) return null
-  return <span className={`rounded px-2 py-0.5 text-[11px] font-medium ${tone}`}>{n} {label}</span>
+  return <span className={`whitespace-nowrap rounded px-2 py-0.5 text-[11px] font-medium ${tone}`}>{n} {label}</span>
 }
 
 function GroupCard({ group, mode }: { group: WorkGroup; mode: WorkMode }) {
@@ -406,8 +406,8 @@ export function MyWorkPage() {
                 )}
               </div>
             </div>
-            {/* Mobile: the table scrolls sideways inside this wrapper; Activity is pinned left and Open right (.tbl-sleeve). */}
-            <div className={`page-sticky-head ${isMobile ? 'tbl-sleeve overflow-x-auto' : ''}`}>
+            {/* Mobile: the table scrolls sideways inside this wrapper (Activity first); only Open is pinned right (.tbl-sleeve-r). */}
+            <div className={`page-sticky-head ${isMobile ? 'tbl-sleeve tbl-sleeve-r overflow-x-auto' : ''}`}>
               <table className="w-full text-sm">
                 <thead>
                   {/* Sortable header row */}
@@ -449,7 +449,7 @@ export function MyWorkPage() {
                         {tableCols.map((c) => <Fragment key={c.key}>{({
                           status: (
                         <td className="px-3 py-2.5">
-                          <span className="inline-flex items-center gap-1.5 rounded-full px-2 py-0.5 text-[10px] font-medium"
+                          <span className="inline-flex items-center gap-1.5 whitespace-nowrap rounded-full px-2 py-0.5 text-[10px] font-medium"
                             style={{ background: `${WORK_BUCKET_COLORS[b]}1a`, color: WORK_BUCKET_COLORS[b] }}>
                             <span className="inline-block h-1.5 w-1.5 rounded-full" style={{ background: WORK_BUCKET_COLORS[b] }} />{b}
                           </span>
@@ -471,7 +471,7 @@ export function MyWorkPage() {
                         <td className="px-3 py-2.5 text-[12px]">{i.part.vendorName}</td>
                           ),
                           milestoneId: (
-                        <td className="px-3 py-2.5"><span className="rounded bg-secondary px-1.5 py-0.5 text-[10px] font-medium text-primary">{i.row.milestoneId}</span></td>
+                        <td className="px-3 py-2.5"><span className="whitespace-nowrap rounded bg-secondary px-1.5 py-0.5 text-[10px] font-medium text-primary">{i.row.milestoneId}</span></td>
                           ),
                           activity: (
                         <td className="px-3 py-2.5 text-[12px]">{i.activity.name}</td>

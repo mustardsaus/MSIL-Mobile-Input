@@ -360,7 +360,7 @@ export function HomePage() {
                 >
                   <span className="min-w-0 flex-1">
                     <span className="mb-1 flex items-center justify-between gap-2">
-                      <span className={`flex-none rounded-full px-2 py-0.5 text-[9.5px] font-semibold ${KIND_STYLE[t.kind] ?? 'bg-slate-100 text-slate-700'}`}>{t.kind}</span>
+                      <span className={`whitespace-nowrap flex-none rounded-full px-2 py-0.5 text-[9.5px] font-semibold ${KIND_STYLE[t.kind] ?? 'bg-slate-100 text-slate-700'}`}>{t.kind}</span>
                       <span className={`text-[10.5px] ${t.due < today ? 'font-semibold text-[#b91c1c]' : 'text-[var(--color-muted)]'}`}>{t.due < today ? 'Overdue ' : ''}{fmtDate(t.due)}</span>
                     </span>
                     <span className="block text-[12.5px] font-semibold leading-snug text-[var(--color-text)]">{t.title}</span>
