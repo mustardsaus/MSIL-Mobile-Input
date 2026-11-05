@@ -422,7 +422,7 @@ export function MyWorkPage() {
                         </span>
                       </th>
                     ))}
-                    <th className={thCls}>{isMobile ? <span className="sr-only">Open</span> : null}</th>
+                    <th className={`${thCls} text-right`}>Actions</th>
                   </tr>
                   {/* Per-column filter row */}
                   <tr className="border-b border-[var(--color-border)] bg-white">

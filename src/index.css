@@ -233,6 +233,37 @@ input:focus-visible, select:focus-visible, textarea:focus-visible {
 }
 @media (max-width: 1023px) {
   /* Right-only sleeve: only the Open column is pinned. */
-  .tbl-sleeve.tbl-sleeve-r th:first-child, .tbl-sleeve.tbl-sleeve-r td:first-child { position: static; box-shadow: none; max-width: none; background: transparent; }
-  .tbl-sleeve.tbl-sleeve-r thead th { background: var(--color-table-head); }
+  /* First column scrolls with the rest; its header cell keeps the sticky-top behaviour of the other header cells. */
+  .tbl-sleeve.tbl-sleeve-r td:first-child { position: static; box-shadow: none; max-width: none; background: transparent; z-index: auto; }
+  .tbl-sleeve.tbl-sleeve-r th:first-child { left: auto; box-shadow: none; max-width: none; z-index: 6 !important; }
+  .tbl-sleeve.tbl-sleeve-r thead tr:first-child th:first-child { background: var(--color-table-head); }
+  .tbl-sleeve.tbl-sleeve-r thead tr:nth-child(2) th:first-child { background: #fff; }
+}
+
+/* ── Mobile type, spacing and touch-size floor (≤640 px) ─────────────────────
+   The desktop design uses 9–11 px micro text; on phones that is below a readable minimum.
+   Raise the small sizes to a 12 px floor (13 px for secondary text), keep the hierarchy
+   (labels < body < titles), and give interactive controls a ≥40 px touch height. */
+@media (max-width: 640px) {
+  .text-\[9px\], .text-\[9\.5px\], .text-\[10px\], .text-\[10\.5px\] { font-size: 12px !important; line-height: 1.35; }
+  .text-\[11px\], .text-\[11\.5px\], .text-xs { font-size: 13px !important; line-height: 1.4; }
+  .text-\[12px\], .text-\[12\.5px\] { font-size: 14px !important; }
+  #main-content select, #main-content input:not([type=checkbox]):not([type=radio]):not([type=range]),
+  .fixed select, .fixed input:not([type=checkbox]):not([type=radio]):not([type=range]) { min-height: 40px; font-size: 16px; }
+  #main-content input[type=checkbox], .fixed input[type=checkbox] { width: 18px; height: 18px; }
+  #main-content button:not([role=option]), .fixed button { min-height: 36px; }
+  /* Table cells: a little more breathing room; header labels never wrap mid-word. */
+  #main-content table th, #main-content table td { padding-top: 12px; padding-bottom: 12px; }
+  #main-content table thead th { white-space: nowrap; }
+  /* Mobile filter row: solid, slightly tinted, separated from the rows scrolling under it. */
+  .page-sticky-head thead tr:nth-child(2) th { background: #f8fafc !important; box-shadow: inset 0 -1px 0 var(--color-border); padding-top: 8px; padding-bottom: 8px; }
+  .page-sticky-head thead tr:nth-child(2) th input { background: #fff !important; }
+  /* Fixed first header row height so the sticky filter row sits exactly under it (no rows peeking between). */
+  .page-sticky-head thead tr:first-child th { box-shadow: inset 0 -1px 0 var(--color-border); height: 44px; padding-top: 0 !important; padding-bottom: 0 !important; box-sizing: border-box; }
+  .page-sticky-head { --sticky-head-row1: 43px; }
+  /* Temporary sample-data buttons: one row, compact (authoring aid, not product UI). */
+  .sample-btn { font-size: 12px !important; padding: 6px 10px; min-height: 36px; }
+  /* Footer: one compact line so it doesn't eat screen height. */
+  .app-footer { flex-wrap: nowrap; padding-bottom: 10px; }
+  .app-footer > span { font-size: 11px !important; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 }

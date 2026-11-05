@@ -24,7 +24,7 @@ function SampleDataButton() {
   // dialogs return false from confirm() without showing anything, which made both buttons appear to do nothing.
   const [ask, setAsk] = useState<null | 'load' | 'unload'>(null)
   const cls =
-    'flex-none rounded-lg border-2 border-dashed border-[#b45309] bg-[#fde68a] px-3 py-2 text-xs font-bold text-[#78350f] shadow-sm hover:bg-[#fcd34d] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#b45309]'
+    'sample-btn flex-none whitespace-nowrap rounded-lg border-2 border-dashed border-[#b45309] bg-[#fde68a] px-3 py-2 text-xs font-bold text-[#78350f] shadow-sm hover:bg-[#fcd34d] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#b45309]'
   const copy = {
     load: { title: 'Load sample parts?', body: 'This replaces ALL current parts and activity data with sample parts built from the current activity fields.', ok: 'Load sample parts' },
     unload: { title: 'Unload parts?', body: 'This removes ALL parts and their activity data. The activity list stays.', ok: 'Unload parts' }
@@ -268,7 +268,7 @@ export function AppLayout() {
           <Outlet context={{ startTour: () => setTourOpen(true) } satisfies AppOutletContext} />
         </main>
 
-        <footer className="flex flex-none flex-wrap items-center justify-between gap-2 px-4 pb-4 pt-1 text-[10px] text-[var(--color-muted)] lg:px-7">
+        <footer className="app-footer flex flex-none flex-wrap items-center justify-between gap-2 px-4 pb-4 pt-1 text-[10px] text-[var(--color-muted)] lg:px-7">
           <span>QA Activity Tracker · EPMP design language</span>
           <span>Prototype data · Light mode</span>
         </footer>

@@ -554,7 +554,7 @@ export function WorkspacePage() {
                   ))}
                   <th className="text-left px-3 py-3 font-medium text-[var(--color-muted)]">Status</th>
                   <th className="text-left px-3 py-3 font-medium text-[var(--color-muted)]">RYG</th>
-                  <th className="px-3 py-3"></th>
+                  <th className="px-3 py-3 text-right font-medium text-[var(--color-muted)]">Actions</th>
                 </tr>
               </thead>
               <tbody>

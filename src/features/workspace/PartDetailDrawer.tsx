@@ -512,10 +512,11 @@ export function PartDetailDrawer({ activity, row, partNo, onClose }: PartDetailD
             </div>
             <button
               onClick={onClose}
-              className="text-[var(--color-muted)] hover:text-[var(--color-text)] p-1 rounded ml-4 flex-shrink-0"
+              className="ml-4 flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full border border-[var(--color-border)] bg-white text-[var(--color-text)] hover:bg-[var(--color-surface)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#bfdbfe]"
               aria-label="Close"
+              title="Close"
             >
-              ✕
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" /></svg>
             </button>
           </div>
           <div className="flex flex-wrap gap-x-4 gap-y-0.5 mt-2 text-xs text-[var(--color-muted)]">
