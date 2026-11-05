@@ -1,3 +1,5 @@
+import { useEffect, useRef } from 'react'
+
 export interface TabItem {
   id: string
   label: string
@@ -13,9 +15,19 @@ interface TabsProps {
 
 /** EPMP tab bar: white rounded strip, active tab is a pale-blue pill with a blue border. */
 export function Tabs({ items, activeId, onChange, className = '' }: TabsProps) {
+  // Pivot: when the strip scrolls sideways (phones), the selected tab slides to the centre so its
+  // neighbours on both sides come into view.
+  const ref = useRef<HTMLDivElement | null>(null)
+  useEffect(() => {
+    const bar = ref.current
+    const btn = bar?.querySelector<HTMLElement>('[aria-selected="true"]')
+    if (!bar || !btn || bar.scrollWidth <= bar.clientWidth) return
+    bar.scrollTo({ left: btn.offsetLeft - bar.offsetLeft - (bar.clientWidth - btn.offsetWidth) / 2, behavior: 'smooth' })
+  }, [activeId])
   return (
     <div
-      className={`flex w-fit max-w-full flex-wrap gap-1 overflow-x-auto rounded-xl bg-white p-1.5 ${className}`}
+      ref={ref}
+      className={`relative flex w-fit max-w-full flex-wrap gap-1 overflow-x-auto rounded-xl bg-white p-1.5 [scrollbar-width:none] ${className}`}
       role="tablist"
     >
       {items.map((item) => {
